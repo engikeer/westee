@@ -1,5 +1,5 @@
 public class SeMain {
     public static void main(String[] args) {
-        System.out.println("gj");
+        System.out.println("你好：SeMain");
     }
 }

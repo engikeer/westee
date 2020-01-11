@@ -1,7 +1,6 @@
 package jdbc;
 
 import java.io.*;
-import java.nio.file.*;
 import java.sql.*;
 import java.util.*;
 
@@ -87,10 +86,10 @@ public class QueryTest {
             stat = conn.prepareStatement(authorPublisherQuery);
             stat.setString(1, author);
             stat.setString(2, publisher);
-        } else if (!author.equals("Any") && publisher.equals("Any")) {
+        } else if (!author.equals("Any")) {
             stat = conn.prepareStatement(authorQuery);
             stat.setString(1, author);
-        } else if (author.equals("Any") && !publisher.equals("Any")) {
+        } else if (!publisher.equals("Any")) {
             stat = conn.prepareStatement(publisherQuery);
             stat.setString(1, publisher);
         } else
