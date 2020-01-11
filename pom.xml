@@ -20,12 +20,14 @@
     </modules>
 
     <dependencies>
+        <!-- Mysql jdbc 驱动 -->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.18</version>
         </dependency>
+        <!-- servlet api -->
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -33,6 +35,7 @@
             <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
+        <!-- jsp api -->
         <!-- https://mvnrepository.com/artifact/javax.servlet.jsp/javax.servlet.jsp-api -->
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
@@ -40,6 +43,15 @@
             <version>2.3.3</version>
             <scope>provided</scope>
         </dependency>
+        <!-- 单元测试，JUnit5 -->
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.5.2</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
