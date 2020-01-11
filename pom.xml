@@ -16,6 +16,7 @@
 
     <modules>
         <module>se</module>
+        <module>servlet-01</module>
     </modules>
 
     <dependencies>
