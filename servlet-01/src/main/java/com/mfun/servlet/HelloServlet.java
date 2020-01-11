@@ -1,4 +1,4 @@
-package com.mfun.main;
+package com.mfun.servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
