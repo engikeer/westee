@@ -70,11 +70,15 @@
           <artifactId>tomcat7-maven-plugin</artifactId>
           <version>2.2</version>
           <configuration>
-            <!-- 调用纯文本的管理接口，只按实际情况更改主机名和端口 -->
+            <!-- url 的编码 -->
+            <charset>UTF-8</charset>
+            <!-- 调用纯文本的管理接口，影响部署相关命令的目标端口，只需按实际情况更改主机名和端口 -->
             <url>http://localhost:8080/manager/text</url>
+            <!-- 运行端口，可选，默认 8080 -->
+            <port>8090</port>
             <!-- 此处的名字必须和setting.xml中配置的ID一致-->
             <server>tomcat9</server>
-            <path>/web01</path>
+            <path>/servlet01</path>
             <!-- 如果覆盖已有映射的路径，必须添加update标签-->
             <update>true</update>
           </configuration>
