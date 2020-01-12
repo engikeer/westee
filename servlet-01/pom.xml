@@ -76,10 +76,10 @@
             <url>http://localhost:8080/manager/text</url>
             <!-- 运行端口，可选，默认 8080 -->
             <port>8090</port>
-            <!-- 此处的名字必须和setting.xml中配置的ID一致-->
+            <!-- 此处的名字必须和setting.xml中配置的 server ID 一致-->
             <server>tomcat9</server>
             <path>/servlet01</path>
-            <!-- 如果覆盖已有映射的路径，必须添加update标签-->
+            <!-- 部署时如果覆盖已有项目，必须添加update标签-->
             <update>true</update>
           </configuration>
         </plugin>
