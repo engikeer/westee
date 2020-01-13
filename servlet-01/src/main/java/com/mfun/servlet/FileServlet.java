@@ -28,7 +28,7 @@ public class FileServlet extends HttpServlet {
         // 4. 准备读入文件的内容
         try (FileInputStream fin = new FileInputStream(realPath)) {
             // 5. 将文件的内容写出到响应中
-            int len = 0;
+            int len;
             byte[] buffer = new byte[1024];
             try (OutputStream out = resp.getOutputStream()) {
                 while ((len = fin.read(buffer)) != -1) {
