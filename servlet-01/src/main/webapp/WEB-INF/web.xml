@@ -54,6 +54,7 @@
     <servlet-name>redirect</servlet-name>
     <url-pattern>/redirect</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>login</servlet-name>
     <servlet-class>com.mfun.servlet.LoginServlet</servlet-class>
