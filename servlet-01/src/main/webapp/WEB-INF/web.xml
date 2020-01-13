@@ -28,4 +28,13 @@
     <url-pattern>/cont</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>file</servlet-name>
+    <servlet-class>com.mfun.servlet.FileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>file</servlet-name>
+    <url-pattern>/file</url-pattern>
+  </servlet-mapping>
+
 </web-app>
