@@ -28,4 +28,10 @@ public class HelloServlet extends HttpServlet {
         out.println("</html>");
     }
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException, ServletException {
+        doGet(req,resp);
+    }
+
 }
