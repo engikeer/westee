@@ -45,7 +45,7 @@ public class SessionServlet extends HttpServlet {
 
         // 手动注销 session，但再次打开浏览器就会生成新的 session
         session.invalidate();
-        // 之后再用原 session 对象调用方法会抛出 NPE，但调用 req.getSession() 可理解获得新的 session
+        // 之后再用原 session 对象调用方法会抛出 NPE，但调用 req.getSession() 可立即获得新的 session
     }
 
     @Override
