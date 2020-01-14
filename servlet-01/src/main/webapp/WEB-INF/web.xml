@@ -82,4 +82,9 @@
     <url-pattern>/session</url-pattern>
   </servlet-mapping>
 
+<!--  <session-config>-->
+<!--    &lt;!&ndash; 15 分钟后，session 自动失效 &ndash;&gt;-->
+<!--    <session-timeout>15</session-timeout>-->
+<!--  </session-config>-->
+
 </web-app>
