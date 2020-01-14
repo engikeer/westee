@@ -50,7 +50,7 @@ public class CookieServlet extends HttpServlet {
 
         if (visited) {
             writer.println("<h3>上次登陆时间：" + dateString + "</h3>");
-            // Safari 浏览器需要对 cookie 中的非英文字符进行编码和解码，否则无法写入。Chrome 可直接写入。
+            // Safari 浏览器需要对 cookie 中的非英文字符进行编码和解码，否则无法保存。Chrome 则不需要编码解码
             writer.println("<p>欢迎：" + URLDecoder.decode(name, "UTF-8") + "</p>");
 
         } else {
@@ -64,7 +64,8 @@ public class CookieServlet extends HttpServlet {
         // 将 cookie 的有效期设置为 3 天
         lastLoginCookie.setMaxAge(3 * 24 * 60 * 60);
         resp.addCookie(lastLoginCookie);
-        // Safari 浏览器需要对 cookie 中的非英文字符进行编码和解码，否则无法写入。Chrome 可直接写入。
+        // Safari 浏览器需要对 cookie 中的非英文字符进行编码和解码，否则无法保存。Chrome 则不需要编码解码
+        // 不进行编码 Safari 中值为空
         Cookie nameCookie = new Cookie("name", URLEncoder.encode("庄颜", "UTF-8"));
         nameCookie.setMaxAge(3 * 24 * 60 * 60);
         resp.addCookie(nameCookie);
