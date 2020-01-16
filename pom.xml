@@ -17,6 +17,7 @@
     <modules>
         <module>se</module>
         <module>servlet-01</module>
+        <module>smbms</module>
     </modules>
 
     <dependencies>
@@ -67,9 +68,6 @@
             <scope>test</scope>
         </dependency>
 
-
     </dependencies>
-
-
 
 </project>
