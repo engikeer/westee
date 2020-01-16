@@ -31,7 +31,7 @@ public class SessionServlet extends HttpServlet {
         // 可存入任意类型的对象
         session.setAttribute("name", "罗辑");
 
-        // 获取 sessionID，就是 cookie 中保存的 SESSIONID
+        // 获取 sessionID，就是 cookie 中保存的 sessionID
         String id = session.getId();
 
         // 获取 session 中保存的属性

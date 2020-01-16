@@ -27,6 +27,7 @@
         <input type="submit">
     </form>
     <h4 id="hh">where</h4>
+        <p>当前在线： ${applicationScope.OnlineCount}人</p>
 </div>
 <script src="static/js/ts.js"></script>
 </body>

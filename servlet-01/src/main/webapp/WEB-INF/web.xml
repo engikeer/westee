@@ -8,6 +8,26 @@
          metadata-complete="true">
   <display-name>Servlet-01</display-name>
 
+  <!--  <session-config>-->
+  <!--    &lt;!&ndash; 15 分钟后，session 自动失效 &ndash;&gt;-->
+  <!--    <session-timeout>15</session-timeout>-->
+  <!--  </session-config>-->
+
+  <!-- 注册 listener -->
+  <listener>
+    <listener-class>com.mfun.listener.OnlineCountListener</listener-class>
+  </listener>
+
+  <!-- 注册 filter -->
+  <filter>
+    <filter-name>CharacterEncoding</filter-name>
+    <filter-class>com.mfun.filter.CharacterEncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharacterEncoding</filter-name>
+    <url-pattern>/filter/*</url-pattern>
+  </filter-mapping>
+
   <!-- 注册 servlet -->
   <servlet>
     <servlet-name>hello</servlet-name>
@@ -17,6 +37,10 @@
   <servlet-mapping>
     <servlet-name>hello</servlet-name>
     <url-pattern>/hello</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>hello</servlet-name>
+    <url-pattern>/filter/hello</url-pattern>
   </servlet-mapping>
 
   <servlet>
@@ -81,10 +105,5 @@
     <servlet-name>session</servlet-name>
     <url-pattern>/session</url-pattern>
   </servlet-mapping>
-
-<!--  <session-config>-->
-<!--    &lt;!&ndash; 15 分钟后，session 自动失效 &ndash;&gt;-->
-<!--    <session-timeout>15</session-timeout>-->
-<!--  </session-config>-->
 
 </web-app>

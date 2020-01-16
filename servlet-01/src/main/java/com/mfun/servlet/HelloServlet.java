@@ -15,7 +15,8 @@ public class HelloServlet extends HttpServlet {
         response.setContentType("text/html");
         // 响应的写出器以该编码写出文本
         // 告诉浏览器，响应里文本的编码
-        response.setCharacterEncoding("UTF-8");
+//        response.setCharacterEncoding("UTF-8");
+        // 通过过滤器指定编码
         PrintWriter out = response.getWriter();
         out.println("<html>");
         out.println("<head>");
@@ -26,6 +27,7 @@ public class HelloServlet extends HttpServlet {
         out.println("<h3>你好，世界</h3>");
         out.println("</body>");
         out.println("</html>");
+        System.out.println("执行servlet");
     }
 
     @Override
