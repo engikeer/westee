@@ -2,13 +2,13 @@ package com.mfun.util;
 
 import java.io.InputStream;
 import java.sql.*;
-import java.util.Properties;
+import java.util.*;
 
 public class ConnectionUtil {
 
-    public static Connection connection;
+    private static Connection connection;
 
-    public static Connection getConnection() {
+    public static void connectDatabase() {
         if (connection == null) {
             System.out.println("初始化数据库连接");
             Properties properties = new Properties();
@@ -26,7 +26,6 @@ public class ConnectionUtil {
                 System.out.println("数据库连接初始化失败");
             }
         }
-        return connection;
     }
 
     /**
@@ -36,14 +35,27 @@ public class ConnectionUtil {
      * @return 结果集
      * @throws SQLException 查询中抛出异常
      */
-    public static ResultSet query(String sql, Object... params)
+    public static List<Map<String, Object>> query(String sql, Object... params)
             throws SQLException {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             for (int i = 0; i < params.length; i++) {
                 // 占位符序号从 1 开始
                 preparedStatement.setObject(i + 1, params[i]);
             }
-            return preparedStatement.executeQuery();
+            // 不能直接返回 ResultSet，关闭语句时会先关闭相关的结果集
+            // 将结果保存在一个 List 中返回
+            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            List<Map<String, Object>> results = new ArrayList<>();
+            while (resultSet.next()) {
+                Map<String, Object> rowData = new HashMap<>();
+                for (int i = 1; i <= columnCount; i++) {
+                    rowData.put(metaData.getColumnName(i), resultSet.getObject(i));
+                }
+                results.add(rowData);
+            }
+            return results;
         }
     }
 
@@ -70,6 +82,12 @@ public class ConnectionUtil {
      * @throws SQLException 关闭时抛出异常
      */
     public static void closeConnection() throws SQLException {
-        connection.close();
+        if (connection != null) {
+            connection.close();
+            System.out.println("数据库连接关闭成功");
+        } else {
+            System.out.println("连接已关闭");
+        }
+
     }
 }
