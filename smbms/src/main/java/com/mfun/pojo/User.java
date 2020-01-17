@@ -1,10 +1,11 @@
 package com.mfun.pojo;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class User {
-    private int id;
+    private long id;
     private String userCode;
     private String userName;
     private String userPassword;
@@ -12,11 +13,11 @@ public class User {
     private Date birthday;
     private String phone;
     private String address;
-    private int userRole;
-    private int createdBy;
-    private Date creationDate;
-    private int modifyBy;
-    private Date modifyDate;
+    private long userRole;
+    private long createdBy;
+    private Date creationDate;  // 注意，数据库中的时间以美国东部时间保存，输出时会转为当前客户端的时区
+    private Long modifyBy;  // 可能为 null
+    private Date modifyDate;  // 可能为 null
 
     public int getAge() {
         Calendar now = Calendar.getInstance();
@@ -32,18 +33,22 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userCode='" + userCode + '\'' +
-                ", userName='" + userName + '\'' +
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        return "User{" + id +
+                ", 账号：'" + userCode + '\'' +
+                ", 名称：'" + userName + '\'' +
+                ", 生日：'" + dateFormat.format(birthday) + '\'' +
+                ", 创建时间：'" + dateTimeFormat.format(creationDate) + '\'' +
                 '}';
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -103,19 +108,19 @@ public class User {
         this.address = address;
     }
 
-    public int getUserRole() {
+    public long getUserRole() {
         return userRole;
     }
 
-    public void setUserRole(int userRole) {
+    public void setUserRole(long userRole) {
         this.userRole = userRole;
     }
 
-    public int getCreatedBy() {
+    public long getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(int createdBy) {
+    public void setCreatedBy(long createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -127,11 +132,11 @@ public class User {
         this.creationDate = creationDate;
     }
 
-    public int getModifyBy() {
+    public Long getModifyBy() {
         return modifyBy;
     }
 
-    public void setModifyBy(int modifyBy) {
+    public void setModifyBy(Long modifyBy) {
         this.modifyBy = modifyBy;
     }
 

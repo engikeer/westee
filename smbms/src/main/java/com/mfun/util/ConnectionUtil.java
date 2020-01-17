@@ -8,7 +8,8 @@ public class ConnectionUtil {
 
     private static Connection connection;
 
-    public static void connectDatabase() {
+
+    public static void connect() {
         if (connection == null) {
             System.out.println("初始化数据库连接");
             Properties properties = new Properties();
@@ -37,6 +38,9 @@ public class ConnectionUtil {
      */
     public static List<Map<String, Object>> query(String sql, Object... params)
             throws SQLException {
+        if (connection == null) {
+            throw new SQLException("未连接到数据库");
+        }
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             for (int i = 0; i < params.length; i++) {
                 // 占位符序号从 1 开始
@@ -68,6 +72,9 @@ public class ConnectionUtil {
      */
     public static int update(String sql, Object... params)
             throws SQLException{
+        if (connection == null) {
+            throw new SQLException("未连接到数据库");
+        }
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             for (int i = 0; i < params.length; i++) {
                 // 占位符序号从 1 开始
@@ -81,7 +88,7 @@ public class ConnectionUtil {
      * 关闭连接
      * @throws SQLException 关闭时抛出异常
      */
-    public static void closeConnection() throws SQLException {
+    public static void disconnect() throws SQLException {
         if (connection != null) {
             connection.close();
             System.out.println("数据库连接关闭成功");
