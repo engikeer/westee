@@ -8,4 +8,8 @@
          metadata-complete="true">
   <display-name>超市订单管理系统</display-name>
 
+  <listener>
+    <listener-class>com.mfun.listener.CloseConnectionListener</listener-class>
+  </listener>
+
 </web-app>
