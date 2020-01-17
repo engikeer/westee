@@ -16,10 +16,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String userCode, String password) throws SQLException {
-        User loginUser = userDao.getLoginUser(userCode);
-        if (loginUser == null || !loginUser.getUserPassword().equals(password)) {
-            return null;
-        }
-        return loginUser;
+        return userDao.getLoginUser(userCode, password);
     }
 }

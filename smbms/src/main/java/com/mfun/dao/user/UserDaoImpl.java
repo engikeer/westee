@@ -12,9 +12,9 @@ import java.sql.Timestamp;
 
 public class UserDaoImpl implements UserDao {
     @Override
-    public User getLoginUser(String userCode) throws SQLException {
-        String sql = "SELECT * FROM smbms_user WHERE userCode = ?";
-        List<Map<String, Object>> results = ConnectionUtil.query(sql, userCode);
+    public User getLoginUser(String userCode, String password) throws SQLException {
+        String sql = "SELECT * FROM smbms_user WHERE userCode = ? AND userPassword = ?";
+        List<Map<String, Object>> results = ConnectionUtil.query(sql, userCode, password);
         if (results.size() != 0) {
             return rowToUser(results.get(0));
         }

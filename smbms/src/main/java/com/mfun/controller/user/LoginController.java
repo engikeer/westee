@@ -14,7 +14,7 @@ import java.sql.SQLException;
 
 public class LoginController extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 获取用户名和密码
         String userCode = req.getParameter("userCode");
         String password = req.getParameter("userPassword");
@@ -36,12 +36,10 @@ public class LoginController extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       doGet(req, resp);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.sendRedirect("/smbms");
     }
 }
