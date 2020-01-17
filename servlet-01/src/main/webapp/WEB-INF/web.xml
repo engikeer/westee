@@ -17,6 +17,9 @@
   <listener>
     <listener-class>com.mfun.listener.OnlineCountListener</listener-class>
   </listener>
+  <listener>
+    <listener-class>com.mfun.listener.CloseConnectionListener</listener-class>
+  </listener>
 
   <!-- 注册 filter -->
   <filter>
