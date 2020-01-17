@@ -1,5 +1,4 @@
 ﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8" %>
-<%@page import="com.mfun.util.ControllerEnum" %>
 <%@include file="../jsp/common/head.jsp"%>
     <div class="right">
         <img class="wColck" src="${pageContext.request.contextPath }/images/clock.jpg" alt="clock"/>
