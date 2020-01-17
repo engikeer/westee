@@ -2,6 +2,8 @@ package com.mfun.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import com.mfun.dao.user.UserDaoImpl;
+import com.mfun.pojo.User;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -14,9 +16,14 @@ public class ConnectionUtilTest {
         List<Map<String, Object>> results = ConnectionUtil.query(
                 "SELECT * FROM smbms_user WHERE userName IN(?, ?)",
                 "李明", "赵燕");
+        int count = 0;
         for (Map<String, Object> row : results) {
-            System.out.println(row);
+            String userCode = (String) row.get("userCode");
+            if ("liming".equals(userCode) || "zhaoyan".equals(userCode)) {
+                count++;
+            }
         }
+        assertEquals(2, count);
         ConnectionUtil.disconnect();
     }
 

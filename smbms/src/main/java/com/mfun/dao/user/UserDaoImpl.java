@@ -2,6 +2,7 @@ package com.mfun.dao.user;
 
 import com.mfun.pojo.User;
 import com.mfun.util.ConnectionUtil;
+import com.mfun.util.Gender;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -20,13 +21,13 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
-    private User rowToUser(Map<String, Object> row) {
+    public User rowToUser(Map<String, Object> row) {
         User user = new User();
         user.setId((long) row.get("id"));
         user.setUserCode((String) row.get("userCode"));
         user.setUserName((String) row.get("userName"));
         user.setUserPassword((String) row.get("userPassword"));
-        user.setGender((int) row.get("gender"));
+        user.setGender(Gender.getGender((int) row.get("gender")));
         user.setBirthday(new java.util.Date(((Date) row.get("birthday")).getTime()));
         user.setPhone((String) row.get("phone"));
         user.setAddress((String) row.get("address"));

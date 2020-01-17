@@ -1,5 +1,7 @@
 package com.mfun.pojo;
 
+import com.mfun.util.Gender;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -9,7 +11,7 @@ public class User {
     private String userCode;
     private String userName;
     private String userPassword;
-    private int gender;
+    private Gender gender;
     private Date birthday;
     private String phone;
     private String address;
@@ -39,6 +41,7 @@ public class User {
         return "User{" + id +
                 ", 账号：'" + userCode + '\'' +
                 ", 名称：'" + userName + '\'' +
+                ", 性别：'" + gender.getDesc() + '\'' +
                 ", 生日：'" + dateFormat.format(birthday) + '\'' +
                 ", 创建时间：'" + dateTimeFormat.format(creationDate) + '\'' +
                 '}';
@@ -76,11 +79,11 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    public int getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
