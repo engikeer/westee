@@ -20,7 +20,7 @@ public class LoginController extends HttpServlet {
         String password = req.getParameter("userPassword");
 
         if (userCode == null || password == null) {
-            resp.sendRedirect("/smbms");
+            resp.sendRedirect(req.getContextPath());
         } else {
             UserService userService = new UserServiceImpl();
             try {
@@ -43,6 +43,6 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("/smbms");
+        resp.sendRedirect(req.getContextPath());
     }
 }
