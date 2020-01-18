@@ -14,7 +14,7 @@ public class UserDaoTest {
     public void getLoginUserTest() throws SQLException {
         ConnectionUtil.connect();
         UserDao dao = new UserDaoImpl();
-        User user = dao.getLoginUser("zhaoyan");
+        User user = dao.getLoginUser("zhaoyan", "0000000");
         assertEquals(8, user.getId());
         ConnectionUtil.disconnect();
     }

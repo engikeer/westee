@@ -12,7 +12,7 @@
   <artifactId>servlet-01</artifactId>
   <packaging>war</packaging>
 
-  <name>servlet-01 Maven Webapp</name>
+  <name>servlet-01</name>
   <url>http://www.m4fun.com/servlet-01</url>
 
   <properties>
@@ -20,16 +20,6 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
-
-<!--  <dependencies>-->
-<!--    &lt;!&ndash; 改用 JUnit 5，从主项目导入 &ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>junit</groupId>-->
-<!--      <artifactId>junit</artifactId>-->
-<!--      <version>4.11</version>-->
-<!--      <scope>test</scope>-->
-<!--    </dependency>-->
-<!--  </dependencies>-->
 
   <build>
     <finalName>servlet-01</finalName>
