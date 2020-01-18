@@ -20,7 +20,6 @@ public class ConnectionUtil {
                 String url = properties.getProperty("jdbc.url");
                 String username = properties.getProperty("jdbc.username");
                 String password = properties.getProperty("jdbc.password");
-                Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
                 connection = DriverManager.getConnection(url, username, password);
             } catch (Exception e) {
                 e.printStackTrace();
