@@ -15,8 +15,8 @@
     <header class="publicHeader">
         <h1>超市订单管理系统</h1>
         <div class="publicHeaderR">
-            <p><span>下午好！</span><span style="color: #fff21b"> ${sessionScope.user_session.userName }</span> , 欢迎你！</p>
-            <a href="${pageContext.request.contextPath }/logout.do">退出</a>
+            <p><span>下午好！</span><span style="color: #fff21b"> ${sessionScope.user.userName }</span> , 欢迎你！</p>
+            <a href="${pageContext.request.contextPath }/jsp/logout.do">退出</a>
         </div>
     </header>
 <!--时间-->
@@ -33,8 +33,8 @@
                  <li ><a href="${pageContext.request.contextPath }/bill.do">订单管理</a></li>
               <li><a href="${pageContext.request.contextPath }/provider.do">供应商管理</a></li>
               <li><a href="${pageContext.request.contextPath }/user.do">用户管理</a></li>
-              <li><a href="${pageContext.request.contextPath }/updatepwd.do?id=${sessionScope.user_session.id }">密码修改</a></li>
-              <li><a href="${pageContext.request.contextPath }/logout.do">退出系统</a></li>
+              <li><a href="${pageContext.request.contextPath }/jsp/pwdmodify.jsp">密码修改</a></li>
+              <li><a href="${pageContext.request.contextPath }/jsp/logout.do">退出系统</a></li>
              </ul>
          </nav>
      </div>

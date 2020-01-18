@@ -11,7 +11,7 @@ import java.io.IOException;
 public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession().removeAttribute(ControllerEnum.USER_SESSION.getValue());
+        req.getSession().removeAttribute(ControllerEnum.USER.getValue());
         resp.sendRedirect(req.getContextPath());
     }
 

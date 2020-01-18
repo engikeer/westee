@@ -23,7 +23,7 @@ public class SysFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-        User user = (User) httpRequest.getSession().getAttribute(ControllerEnum.USER_SESSION.getValue());
+        User user = (User) httpRequest.getSession().getAttribute(ControllerEnum.USER.getValue());
 
         if (user == null) {
             HttpServletResponse httpResponse = (HttpServletResponse) response;

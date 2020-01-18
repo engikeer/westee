@@ -21,6 +21,12 @@ public class UserDaoImpl implements UserDao {
         return null;
     }
 
+    @Override
+    public int updatePassword(long id, String password) throws SQLException {
+        String sql = "UPDATE smbms_user SET userPassword = ? WHERE id = ?";
+        return ConnectionUtil.update(sql, password, id);
+    }
+
     public User rowToUser(Map<String, Object> row) {
         User user = new User();
         user.setId((long) row.get("id"));

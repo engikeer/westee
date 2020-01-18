@@ -1,7 +1,8 @@
 package com.mfun.util;
 
 public enum ControllerEnum {
-    USER_SESSION("user_session");
+    USER("user"),
+    MESSAGE("message");
 
     private String value;
     ControllerEnum(String value){

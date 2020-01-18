@@ -27,7 +27,7 @@ public class LoginController extends HttpServlet {
                 User user = userService.login(userCode, password);
                 if (user != null) {
                     // 登陆成功后将用户对象放入 session 中
-                    req.getSession().setAttribute(ControllerEnum.USER_SESSION.getValue(), user);
+                    req.getSession().setAttribute(ControllerEnum.USER.getValue(), user);
                     // 跳转到主页
                     resp.sendRedirect("jsp/frame.jsp");
                 } else {

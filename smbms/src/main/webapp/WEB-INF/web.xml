@@ -8,6 +8,10 @@
          metadata-complete="true">
   <display-name>超市订单管理系统</display-name>
 
+  <session-config>
+    <session-timeout>60</session-timeout>
+  </session-config>
+
   <listener>
     <listener-class>com.mfun.listener.CloseConnectionListener</listener-class>
   </listener>
@@ -48,7 +52,16 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>logout</servlet-name>
-    <url-pattern>/logout.do</url-pattern>
+    <url-pattern>/jsp/logout.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>user</servlet-name>
+    <servlet-class>com.mfun.controller.user.UserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>user</servlet-name>
+    <url-pattern>/jsp/user.do</url-pattern>
   </servlet-mapping>
 
 </web-app>

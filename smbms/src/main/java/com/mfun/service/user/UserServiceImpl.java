@@ -18,4 +18,10 @@ public class UserServiceImpl implements UserService {
     public User login(String userCode, String password) throws SQLException {
         return userDao.getLoginUser(userCode, password);
     }
+
+    @Override
+    public boolean updatePassword(long id, String password) throws SQLException {
+        int i = userDao.updatePassword(id, password);
+        return i == 1;
+    }
 }
