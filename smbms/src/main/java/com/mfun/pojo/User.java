@@ -21,6 +21,8 @@ public class User {
     private Long modifyBy;  // 可能为 null
     private Date modifyDate;  // 可能为 null
 
+    private String roleName;
+
     public int getAge() {
         Calendar now = Calendar.getInstance();
         now.setTime(new Date());
@@ -30,7 +32,11 @@ public class User {
     }
 
     public String getRoleName() {
-        return "";
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override
@@ -43,6 +49,7 @@ public class User {
                 ", 名称：'" + userName + '\'' +
                 ", 性别：'" + gender.getDesc() + '\'' +
                 ", 生日：'" + dateFormat.format(birthday) + '\'' +
+                ", 角色：'" + roleName + '\'' +
                 ", 创建时间：'" + dateTimeFormat.format(creationDate) + '\'' +
                 '}';
     }

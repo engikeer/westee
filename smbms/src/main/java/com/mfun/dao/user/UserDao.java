@@ -3,6 +3,7 @@ package com.mfun.dao.user;
 import com.mfun.pojo.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface UserDao {
     /**
@@ -25,11 +26,24 @@ public interface UserDao {
 
     /**
      * 根据名称和角色查询符合的用户数量
-     * @param username 用户名称
-     * @param userRole 用户角色
+     * @param username 名称
+     * @param userRole 角色
      * @return 记录数
      * @throws SQLException SQL 异常
      */
     public int getUserCount(String username, int userRole) throws SQLException;
+
+    /**
+     * 根据名称和角色查询符合的用户列表
+     * @param username 名称
+     * @param userRole 角色
+     * @param currentPageNo 当前页码
+     * @param pageSize 页面大小
+     * @return 用户列表
+     * @throws SQLException SQL 异常
+     */
+    public List<User> getUserList(
+            String username, int userRole, int currentPageNo, int pageSize)
+            throws SQLException;
 
 }

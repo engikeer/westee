@@ -1,5 +1,6 @@
 package com.mfun.dao.user;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.mfun.pojo.User;
@@ -7,8 +8,11 @@ import com.mfun.util.ConnectionUtil;
 import org.junit.jupiter.api.Test;
 
 
-import java.sql.ResultSet;
+import java.lang.reflect.Method;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class UserDaoTest {
     @Test
@@ -30,5 +34,49 @@ public class UserDaoTest {
         assertEquals(2, dao.getUserCount("赵", 0));
         ConnectionUtil.disconnect();
         System.out.println("结束");
+    }
+
+    @Test
+    public void queryTest() throws Exception {
+        ConnectionUtil.connect();
+        List<Map<String, Object>> results = ConnectionUtil.query(
+                "SELECT u.*, r.roleName FROM smbms_user u, smbms_role r " +
+                        "WHERE u.userName IN(?, ?) AND u.userRole = r.id " +
+                        "ORDER BY u.userRole DESC",
+                "李明", "赵燕");
+
+        Class<UserDaoImpl> cls = UserDaoImpl.class;
+        Method rowToUser = cls.getDeclaredMethod("rowToUser", Map.class);
+        rowToUser.setAccessible(true);
+        List<String> names = new ArrayList<>();
+        for (Map<String, Object> row : results) {
+            User user = (User) rowToUser.invoke(null, row);
+            names.add(user.getUserName());
+        }
+        assertArrayEquals(new String[] {"赵燕", "李明"}, names.toArray());
+        ConnectionUtil.disconnect();
+    }
+
+    @Test
+    public void updateTest() throws Exception {
+        ConnectionUtil.connect();
+        int count = ConnectionUtil.update(
+                "UPDATE smbms_user SET gender = ? WHERE userName = ?",
+                1, "张晨");
+        assertEquals(1, count);
+        ConnectionUtil.disconnect();
+    }
+
+    @Test
+    public void getUserListTest() throws Exception {
+        ConnectionUtil.connect();
+        UserDaoImpl userDao = new UserDaoImpl();
+        List<User> users = userDao.getUserList(null, 3, 1, 3);
+        List<String> names = new ArrayList<>();
+        for (User user : users) {
+            names.add(user.getUserName());
+        }
+        assertArrayEquals(new String[] {"孙兴", "张晨", "邓超"}, names.toArray());
+        ConnectionUtil.disconnect();
     }
 }
