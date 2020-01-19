@@ -18,6 +18,7 @@
         <module>se</module>
         <module>servlet-01</module>
         <module>smbms</module>
+        <module>book</module>
     </modules>
 
     <dependencies>
