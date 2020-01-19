@@ -3,7 +3,7 @@ package com.mfun.pojo;
 import java.util.Date;
 
 public class Bill {
-    private int id;
+    private long id;
     private String billCode;
     private String productName;
     private String productDesc;
@@ -11,21 +11,21 @@ public class Bill {
     private double productCount;
     private double totalPrice;
     private int isPayment;
-    private int createdBy;
+    private long createdBy;
     private Date creationDate;
-    private int modifyBy;
-    private Date modifyDate;
-    private int providerId;
+    private Long modifyBy;  // 可能为空
+    private Date modifyDate;  // 可能为空
+    private long providerId;
 
     public String getProviderName() {
         return "";
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -85,11 +85,11 @@ public class Bill {
         this.isPayment = isPayment;
     }
 
-    public int getCreatedBy() {
+    public long getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(int createdBy) {
+    public void setCreatedBy(long createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -101,11 +101,11 @@ public class Bill {
         this.creationDate = creationDate;
     }
 
-    public int getModifyBy() {
+    public Long getModifyBy() {
         return modifyBy;
     }
 
-    public void setModifyBy(int modifyBy) {
+    public void setModifyBy(Long modifyBy) {
         this.modifyBy = modifyBy;
     }
 
@@ -117,11 +117,11 @@ public class Bill {
         this.modifyDate = modifyDate;
     }
 
-    public int getProviderId() {
+    public long getProviderId() {
         return providerId;
     }
 
-    public void setProviderId(int providerId) {
+    public void setProviderId(long providerId) {
         this.providerId = providerId;
     }
 }

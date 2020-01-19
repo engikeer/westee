@@ -3,7 +3,7 @@ package com.mfun.pojo;
 import java.util.Date;
 
 public class Provider {
-    private int id;
+    private long id;
     private String proCode;
     private String proName;
     private String proDesc;  // 描述
@@ -11,16 +11,16 @@ public class Provider {
     private String proPhone;
     private String proAddress;
     private String proFax;  // 传真
-    private int createdBy;
+    private long createdBy;
     private Date creationDate;
-    private Date modifyDate;
-    private int modifyBy;
+    private Date modifyDate;  // 可能为空
+    private Long modifyBy;  // 可能为空
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -80,11 +80,11 @@ public class Provider {
         this.proFax = proFax;
     }
 
-    public int getCreatedBy() {
+    public long getCreatedBy() {
         return createdBy;
     }
 
-    public void setCreatedBy(int createdBy) {
+    public void setCreatedBy(long createdBy) {
         this.createdBy = createdBy;
     }
 
@@ -104,11 +104,11 @@ public class Provider {
         this.modifyDate = modifyDate;
     }
 
-    public int getModifyBy() {
+    public Long getModifyBy() {
         return modifyBy;
     }
 
-    public void setModifyBy(int modifyBy) {
+    public void setModifyBy(Long modifyBy) {
         this.modifyBy = modifyBy;
     }
 }
