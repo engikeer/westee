@@ -72,17 +72,4 @@ public class UserDaoImpl implements UserDao {
         }
         return user;
     }
-
-    public static void main(String[] args) {
-        List<Object> list = new ArrayList<>();
-        list.add("AA");
-        list.add("BB");
-        test(list.toArray());
-    }
-
-    private static void test(Object... param) {
-        for (Object p : param) {
-            System.out.println(p);
-        }
-    }
 }
