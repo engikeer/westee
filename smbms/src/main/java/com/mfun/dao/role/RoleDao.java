@@ -11,5 +11,5 @@ public interface RoleDao {
      * @return 角色列表
      * @throws SQLException SQL 异常
      */
-    public List<Role> getRoleList() throws SQLException;
+    List<Role> getRoleList() throws SQLException;
 }

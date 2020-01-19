@@ -13,7 +13,7 @@ public interface UserDao {
      * @return 查询到的用户可能为空
      * @throws SQLException SQL 异常
      */
-    public User getLoginUser(String userCode, String password) throws SQLException;
+    User getLoginUser(String userCode, String password) throws SQLException;
 
     /**
      * 更新当前用户的密码
@@ -22,7 +22,7 @@ public interface UserDao {
      * @return 数据库受影响的记录数
      * @throws SQLException SQL 异常
      */
-    public int updatePassword(long id, String password) throws SQLException;
+    int updatePassword(long id, String password) throws SQLException;
 
     /**
      * 根据名称和角色查询符合的用户数量
@@ -31,7 +31,7 @@ public interface UserDao {
      * @return 记录数
      * @throws SQLException SQL 异常
      */
-    public int getUserCount(String username, int userRole) throws SQLException;
+    int getUserCount(String username, int userRole) throws SQLException;
 
     /**
      * 根据名称和角色查询符合的用户列表
@@ -42,7 +42,7 @@ public interface UserDao {
      * @return 用户列表
      * @throws SQLException SQL 异常
      */
-    public List<User> getUserList(
+    List<User> getUserList(
             String username, int userRole, int currentPageNo, int pageSize)
             throws SQLException;
 
