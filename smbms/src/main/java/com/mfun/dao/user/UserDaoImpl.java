@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.stream.Collectors;
 
 public class UserDaoImpl implements UserDao {
     @Override
@@ -73,13 +74,11 @@ public class UserDaoImpl implements UserDao {
         param.add(pageSize);
 
         List<Map<String, Object>> rows = ConnectionUtil.query(sql.toString(), param.toArray());
-        List<User> users = new ArrayList<>();
+
         if (rows.size() > 0) {
-            for (Map<String, Object> row : rows) {
-                User user = rowToUser(row);
-                users.add(user);
-            }
-            return users;
+            // 如果 rows.size 为 0，collect 会返回 空列表，而不是 null
+            return rows.stream().map(UserDaoImpl::rowToUser)
+                    .collect(Collectors.toList());
         } else {
             return null;
         }

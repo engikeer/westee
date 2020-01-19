@@ -3,19 +3,28 @@ package com.mfun.pojo;
 import java.util.Date;
 
 public class Role {
-    private int id;
+    private long id;
     private String roleCode;
     private String roleName;
-    private int createdBy;
+    private long createBy;
     private Date creationDate;
-    private int modifyBy;
-    private Date modifyDate;
+    private Long modifyBy;  // 可能为 null
+    private Date modifyDate; // 可能为 null
 
-    public int getId() {
+    @Override
+    public String toString() {
+        return "Role{" +
+                "角色 id：" + id +
+                ", 角色代码：'" + roleCode + '\'' +
+                ", 角色名：'" + roleName + '\'' +
+                '}';
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -35,12 +44,12 @@ public class Role {
         this.roleName = roleName;
     }
 
-    public int getCreatedBy() {
-        return createdBy;
+    public long getCreateBy() {
+        return createBy;
     }
 
-    public void setCreatedBy(int createdBy) {
-        this.createdBy = createdBy;
+    public void setCreateBy(long createBy) {
+        this.createBy = createBy;
     }
 
     public Date getCreationDate() {
@@ -51,11 +60,11 @@ public class Role {
         this.creationDate = creationDate;
     }
 
-    public int getModifyBy() {
+    public Long getModifyBy() {
         return modifyBy;
     }
 
-    public void setModifyBy(int modifyBy) {
+    public void setModifyBy(Long modifyBy) {
         this.modifyBy = modifyBy;
     }
 

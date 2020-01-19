@@ -1,18 +1,16 @@
 package com.mfun.dao.user;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import com.mfun.pojo.User;
 import com.mfun.util.ConnectionUtil;
 import org.junit.jupiter.api.Test;
-
 
 import java.lang.reflect.Method;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UserDaoTest {
     @Test
@@ -39,7 +37,7 @@ public class UserDaoTest {
     @Test
     public void queryTest() throws Exception {
         ConnectionUtil.connect();
-        List<Map<String, Object>> results = ConnectionUtil.query(
+        List<Map<String, Object>> rows = ConnectionUtil.query(
                 "SELECT u.*, r.roleName FROM smbms_user u, smbms_role r " +
                         "WHERE u.userName IN(?, ?) AND u.userRole = r.id " +
                         "ORDER BY u.userRole DESC",
@@ -48,8 +46,9 @@ public class UserDaoTest {
         Class<UserDaoImpl> cls = UserDaoImpl.class;
         Method rowToUser = cls.getDeclaredMethod("rowToUser", Map.class);
         rowToUser.setAccessible(true);
+
         List<String> names = new ArrayList<>();
-        for (Map<String, Object> row : results) {
+        for (Map<String, Object> row : rows) {
             User user = (User) rowToUser.invoke(null, row);
             names.add(user.getUserName());
         }
@@ -72,11 +71,12 @@ public class UserDaoTest {
         ConnectionUtil.connect();
         UserDaoImpl userDao = new UserDaoImpl();
         List<User> users = userDao.getUserList(null, 3, 1, 3);
-        List<String> names = new ArrayList<>();
-        for (User user : users) {
-            names.add(user.getUserName());
-        }
-        assertArrayEquals(new String[] {"孙兴", "张晨", "邓超"}, names.toArray());
+        String[] names = users.stream().map(User::getUserName).toArray(String[]::new);
+        assertArrayEquals(new String[] {"孙兴", "张晨", "邓超"}, names);
+
+        users = userDao.getUserList("李明", 3, 1, 3);
+        assertNull(users);
+
         ConnectionUtil.disconnect();
     }
 }
