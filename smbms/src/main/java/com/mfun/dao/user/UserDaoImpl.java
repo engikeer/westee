@@ -3,8 +3,10 @@ package com.mfun.dao.user;
 import com.mfun.pojo.User;
 import com.mfun.util.ConnectionUtil;
 import com.mfun.util.Gender;
+import com.mysql.cj.util.StringUtils;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.sql.Date;
@@ -27,6 +29,30 @@ public class UserDaoImpl implements UserDao {
         return ConnectionUtil.update(sql, password, id);
     }
 
+    @Override
+    public int getUserCount(String username, int userRole) throws SQLException {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT COUNT(1) as count FROM smbms_user WHERE 1");
+        List<Object> param  = new ArrayList<>();
+        if (!StringUtils.isNullOrEmpty(username)) {
+            sql.append(" AND userName Like ?");
+            param.add("%" + username + "%");
+        }
+
+        if (userRole > 0) {
+            sql.append(" AND userRole = ?");
+            param.add(userRole);
+        }
+        String s = sql.toString();
+        List<Map<String, Object>> query = ConnectionUtil.query(sql.toString(), param.toArray());
+        if (query.size() > 0) {
+            Long count = (Long) query.get(0).get("count");
+            return count.intValue();
+        } else {
+            return 0;
+        }
+    }
+
     public User rowToUser(Map<String, Object> row) {
         User user = new User();
         user.setId((long) row.get("id"));
@@ -45,5 +71,18 @@ public class UserDaoImpl implements UserDao {
             user.setModifyDate(new java.util.Date(((Timestamp) row.get("modifyDate")).getTime()));
         }
         return user;
+    }
+
+    public static void main(String[] args) {
+        List<Object> list = new ArrayList<>();
+        list.add("AA");
+        list.add("BB");
+        test(list.toArray());
+    }
+
+    private static void test(Object... param) {
+        for (Object p : param) {
+            System.out.println(p);
+        }
     }
 }

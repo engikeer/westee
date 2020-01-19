@@ -10,8 +10,8 @@
            		<form method="post" action="${pageContext.request.contextPath }/user.html">
 					<input name="method" value="query" class="input-text" type="hidden">
 					 <span>用户名：</span>
-					 <input name="queryname" class="input-text"	type="text" value="${queryname }">
-					 
+					 <input name="queryname" class="input-text"	type="text" value="${queryname}">
+
 					 <span>用户角色：</span>
 					 <select name="queryUserRole">
 						<c:if test="${roleList != null }">
@@ -25,7 +25,7 @@
 					 
 					 <input type="hidden" name="pageIndex" value="1"/>
 					 <input	value="查 询" type="submit" id="searchbutton">
-					 <a href="${pageContext.request.contextPath}/userAdd.html">添加用户</a>
+					 <a href="${pageContext.request.contextPath}/jsp/useradd.jsp">添加用户</a>
 				</form>
             </div>
             <!--用户-->
@@ -39,7 +39,7 @@
                     <th width="10%">用户角色</th>
                     <th width="30%">操作</th>
                 </tr>
-                   <c:forEach var="user" items="${page.list }" varStatus="status">
+                   <c:forEach var="user" items="${userlist }" varStatus="status">
 					<tr>
 						<td>
 						<span>${user.userCode }</span>
@@ -70,11 +70,11 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<input type="hidden" id="totalPageCount" value="${page.total}"/>
+			<input type="hidden" id="totalPageCount" value="${totalPageCount}"/>
 		  	<c:import url="rollpage.jsp">
-	          	<c:param name="totalCount" value="${page.count}"/>
-	          	<c:param name="currentPageNo" value="${page.index}"/>
-	          	<c:param name="totalPageCount" value="${page.total}"/>
+	          	<c:param name="totalCount" value="${totalCount}"/>
+	          	<c:param name="currentPageNo" value="${currentPageNo}"/>
+	          	<c:param name="totalPageCount" value="${totalPageCount}"/>
           	</c:import>
         </div>
     </section>
