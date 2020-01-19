@@ -7,10 +7,10 @@
                 <span>用户管理页面</span>
             </div>
             <div class="search">
-           		<form method="post" action="${pageContext.request.contextPath }/user.html">
+           		<form method="post" action="${pageContext.request.contextPath }/jsp/user.do">
 					<input name="method" value="query" class="input-text" type="hidden">
 					 <span>用户名：</span>
-					 <input name="queryname" class="input-text"	type="text" value="${queryname}">
+					 <input name="queryname" class="input-text"	type="text" value="${queryUserName}">
 
 					 <span>用户角色：</span>
 					 <select name="queryUserRole">
@@ -49,8 +49,8 @@
 						</td>
 						<td>
 							<span>
-								<c:if test="${user.gender==1}">男</c:if>
-								<c:if test="${user.gender==2}">女</c:if>
+								<c:if test="${user.gender.value==2}">男</c:if>
+								<c:if test="${user.gender.value==1}">女</c:if>
 							</span>
 						</td>
 						<td>
@@ -60,7 +60,7 @@
 						<span>${user.phone}</span>
 						</td>
 						<td>
-							<span>${user.userRoleName}</span>
+							<span>${user.roleName}</span>
 						</td>
 						<td>
 						<span><a class="viewUser" href="javascript:;" userid=${user.id } username=${user.userName }><img src="${pageContext.request.contextPath }/images/read.png" alt="查看" title="查看"/></a></span>

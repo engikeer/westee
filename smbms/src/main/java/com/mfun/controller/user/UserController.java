@@ -1,10 +1,14 @@
 package com.mfun.controller.user;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mfun.pojo.Role;
 import com.mfun.pojo.User;
+import com.mfun.service.role.RoleService;
+import com.mfun.service.role.RoleServiceImpl;
 import com.mfun.service.user.UserService;
 import com.mfun.service.user.UserServiceImpl;
 import com.mfun.util.ControllerEnum;
+import com.mfun.util.PageSupport;
 import com.mysql.cj.util.StringUtils;
 
 import javax.servlet.ServletException;
@@ -15,6 +19,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class UserController extends HttpServlet {
@@ -30,7 +35,70 @@ public class UserController extends HttpServlet {
             updatePassword(req, resp);
         } else if ("pwdmodify".equals(method)) {
             pwdModify(req, resp);
+        } else if ("query".equals(method)) {
+            query(req, resp);
         }
+    }
+
+    /**
+     * 查询用户信息
+     * @param req 请求
+     * @param resp 响应
+     */
+    private void query(HttpServletRequest req, HttpServletResponse resp) {
+        // 从前端获取参数
+        String queryname = req.getParameter("queryname");
+        if ("".equals(queryname)) {
+            queryname = null;
+        }
+        int queryUserRole = 0;
+        if (!StringUtils.isNullOrEmpty(req.getParameter("queryUserRole"))) {
+            queryUserRole = Integer.parseInt(req.getParameter("queryUserRole"));
+        }
+        int currentPageNo = 1;
+        if (!StringUtils.isNullOrEmpty(req.getParameter("pageIndex"))) {
+            currentPageNo = Integer.parseInt(req.getParameter("pageIndex"));
+        }
+
+        int pageSize = 5;  // 首次访问时显示的条目数，可从配置文件中读取
+
+        // 获取用户总数
+        UserService userService = new UserServiceImpl();
+        try {
+            int userCount = userService.getUserCount(queryname, queryUserRole);
+            PageSupport pageSupport = new PageSupport();
+            pageSupport.setPageSize(pageSize);
+            pageSupport.setCurrentPageNo(currentPageNo);
+            pageSupport.setTotalCount(userCount);
+
+            // 控制首页和尾页
+            int totalPageCount = pageSupport.getTotalPageCount();
+            // 页码小于 1，显示第一页
+            if (totalPageCount < 1) {
+                currentPageNo = 1;
+            } else if (currentPageNo > totalPageCount) {
+                currentPageNo = totalPageCount;
+            }
+            List<User> users = userService.getUserList(queryname, queryUserRole, currentPageNo, pageSize);
+            req.setAttribute("userlist", users);
+
+            RoleService roleService = new RoleServiceImpl();
+            List<Role> roles = roleService.getRoleList();
+            req.setAttribute("roleList", roles);
+            req.setAttribute("totalPageCount", totalPageCount);
+            req.setAttribute("totalCount", userCount);
+            req.setAttribute("currentPageNo", currentPageNo);
+            req.setAttribute("queryUserName", queryname);
+            req.setAttribute("queryUserRole", req.getParameter("queryUserRole"));
+
+            req.getRequestDispatcher("/jsp/userlist.jsp").forward(req, resp);
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
     }
 
     /**
