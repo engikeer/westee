@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
             System.out.println(h);
         }
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/hello");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("hello");
         dispatcher.forward(req, resp);
 
 //        resp.sendRedirect("/servlet01/hello");
