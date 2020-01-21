@@ -15,7 +15,7 @@ public class ConnectionUtil {
             Properties properties = new Properties();
             // 通过类加载器加载资源
             // 由于资源文件被发布到类路径下，所以使用类加载器加载文件
-            InputStream in = ConnectionUtil.class.getClassLoader().getResourceAsStream("database.properties");
+            InputStream in = ConnectionUtil.class.getResourceAsStream("/database.properties");
             try {
                 properties.load(in);
                 String url = properties.getProperty("jdbc.url");
