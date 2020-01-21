@@ -123,4 +123,13 @@
         <url-pattern>/relative</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>path</servlet-name>
+        <servlet-class>com.mfun.servlet.PathServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>path</servlet-name>
+        <url-pattern>/where/path</url-pattern>
+    </servlet-mapping>
+
 </web-app>
