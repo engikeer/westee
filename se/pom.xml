@@ -25,7 +25,7 @@
             <version>3.4.1</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-        <!-- HikariCP 需要的日志实现 -->
+        <!-- HikariCP 需要的日志实现，也可选择其他 slf4j 实现，只能导入一个实现 -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
