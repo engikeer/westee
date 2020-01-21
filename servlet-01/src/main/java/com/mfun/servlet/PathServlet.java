@@ -38,6 +38,7 @@ public class PathServlet extends HttpServlet {
             writer.println("绝对路径：abc.txt：" + this.getClass().getResource("/abc.txt").getPath());
             // 访问同一个包中的 FileServlet.class
             writer.println("相对路径：" + this.getClass().getResource("FileServlet.class").getPath());
+            writer.println("相对路径：" + this.getClass().getResource("abc.txt").getPath());
 
             writer.println("this. ：" + PathServlet.class.getResource(".").getPath());
             writer.println("this空：" + PathServlet.class.getResource("").getPath());
