@@ -90,8 +90,17 @@
                         <update>true</update>
                     </configuration>
                 </plugin>
-
             </plugins>
         </pluginManagement>
+
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.txt</include>
+                </includes>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 </project>
