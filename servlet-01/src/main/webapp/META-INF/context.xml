@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context>
+<WatchedResource>WEB-INF/web.xml</WatchedResource>
+<!-- 需要使用 factory 属性为实体类指定资源工厂 -->
+<!-- 可指定生成对象时设置的属性，对象返回前会调用对应的 setter 设置属性值 -->
+<Resource
+    name="mfun/PersonFactory"
+    auth="Container"
+    type="com.mfun.pojo.Person"
+    factory="org.apache.naming.factory.BeanFactory"
+    personName="Ted" />
+<!-- DataSource 的资源工厂默认可用，不需要指定 -->
+<Resource
+    name="mfun/mysqlDataSource"
+    auth="Container"
+    type="javax.sql.DataSource"
+    maxActive="100"
+    maxIdle="30"
+    maxWait="10000"
+    username="engikeer"
+    password="111"
+    driverClassName="com.mysql.cj.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/corejava"/>
+</Context>

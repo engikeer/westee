@@ -132,4 +132,16 @@
         <url-pattern>/where/path</url-pattern>
     </servlet-mapping>
 
+    <!-- <resource-env-ref> 的功能与 <resource-ref> 相同，但不需要指定 auth -->
+    <resource-env-ref>
+        <description>Object factory for Person instances.</description>
+        <resource-env-ref-name>mfun/PersonFactory</resource-env-ref-name>
+        <resource-env-ref-type>com.mfun.pojo.Person</resource-env-ref-type>
+    </resource-env-ref>
+
+    <resource-env-ref>
+        <resource-env-ref-name>mfun/mysqlDataSource</resource-env-ref-name>
+        <resource-env-ref-type>javax.sql.DataSource</resource-env-ref-type>
+    </resource-env-ref>
+
 </web-app>

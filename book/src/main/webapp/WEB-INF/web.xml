@@ -8,13 +8,4 @@
          metadata-complete="true">
   <display-name>书城</display-name>
 
-  <servlet>
-    <servlet-name>hello</servlet-name>
-    <servlet-class>com.mfun.servlet.HelloServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>hello</servlet-name>
-    <url-pattern>/hello</url-pattern>
-  </servlet-mapping>
-
 </web-app>
