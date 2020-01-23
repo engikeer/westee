@@ -8,7 +8,7 @@
     auth="Container"
     type="com.mfun.pojo.Person"
     factory="org.apache.naming.factory.BeanFactory"
-    personName="Ted" />
+    personName="庄颜" />
 <!-- DataSource 的资源工厂默认可用，不需要指定 -->
 <Resource
     name="mfun/mysqlDataSource"
@@ -16,6 +16,7 @@
     type="javax.sql.DataSource"
     maxActive="100"
     maxIdle="30"
+    validationQuery="/* ping */"
     maxWait="10000"
     username="engikeer"
     password="111"
