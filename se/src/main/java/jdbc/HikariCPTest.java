@@ -26,6 +26,8 @@ public class HikariCPTest {
                 System.out.println(resultSet.getInt(1));
             }
         }
+        // 关闭数据源
+        ds.close();
     }
 
     public static void test() throws Exception {

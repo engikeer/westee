@@ -6,6 +6,10 @@
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0"
          metadata-complete="true">
-  <display-name>书城</display-name>
+    <display-name>书城</display-name>
+
+    <listener>
+        <listener-class>com.mfun.listener.AppListener</listener-class>
+    </listener>
 
 </web-app>

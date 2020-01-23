@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class ConnectionUtils {
-    private static DataSource dataSource;
+    private static HikariDataSource dataSource;
 
     static {
         Properties properties = new Properties();
@@ -28,5 +28,11 @@ public class ConnectionUtils {
 
     public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
+    }
+
+    public static void closeDataSource() {
+        if (dataSource != null) {
+            dataSource.close();
+        }
     }
 }
