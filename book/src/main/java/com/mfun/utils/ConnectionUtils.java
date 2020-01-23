@@ -15,7 +15,7 @@ public class ConnectionUtils {
 
     static {
         Properties properties = new Properties();
-        InputStream in = ConnectionUtils.class.getClassLoader().getResourceAsStream("db.properties");
+        InputStream in = ConnectionUtils.class.getResourceAsStream("/db.properties");
         try {
             properties.load(in);
         } catch (IOException | NullPointerException e) {

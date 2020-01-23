@@ -19,6 +19,6 @@
         }
     }
 %>
-<h3><%= username + "，见到你很高兴！"%></h3>
+<h3><span style="color: #1e90ff"><%= username %></span>，见到你很高兴！</h3>
 </body>
 </html>
