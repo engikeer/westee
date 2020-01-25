@@ -1,11 +1,14 @@
 package com.mfun.utils;
 
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.MapHandler;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +24,16 @@ public class ConnectionUtilsTest {
                 String username = resultSet.getString("username");
                 assertEquals("庄颜", username);
             }
+        }
+    }
+
+    @Test
+    public void getRunnerTest() throws SQLException {
+        QueryRunner runner = ConnectionUtils.getRunner();
+        MapHandler mapHandler = new MapHandler();
+        Map<String, Object> result = runner.query("SELECT * FROM bs_user LIMIT 1", mapHandler);
+        for (Map.Entry<String, Object> entry : result.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
         }
     }
 }

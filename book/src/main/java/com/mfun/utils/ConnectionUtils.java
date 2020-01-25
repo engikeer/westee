@@ -2,6 +2,7 @@ package com.mfun.utils;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.apache.commons.dbutils.QueryRunner;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.Properties;
 
 public class ConnectionUtils {
     private static HikariDataSource dataSource;
+    private static QueryRunner runner;
 
     static {
         Properties properties = new Properties();
@@ -24,6 +26,11 @@ public class ConnectionUtils {
         }
         HikariConfig config = new HikariConfig(properties);
         dataSource = new HikariDataSource(config);
+        runner = new QueryRunner(dataSource);
+    }
+
+    public static QueryRunner getRunner() {
+        return runner;
     }
 
     public static Connection getConnection() throws SQLException {
