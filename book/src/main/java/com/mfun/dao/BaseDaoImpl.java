@@ -45,11 +45,13 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
          return null;
     }
 
+    // TODO: 之后实现
     @Override
     public boolean updateBean(T bean) {
         return false;
     }
 
+    // TODO: 之后实现
     @Override
     public boolean deleteBean(T bean) {
         return false;
