@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class BaseDaoImpl<T> implements BaseDao<T> {
-    private Class<T> type;
+    private final Class<T> type;
 
 //    /**
 //     * 通过反射捕获实际的类型参数，必须实例化子类对象时调用，不能直接实例化该类的对象
@@ -26,13 +26,10 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
     /**
      * 用于实现子类的无参构造器
+     * 直接传入类型参数，更安全
      * @param type 类型参数的类对象
      */
     protected BaseDaoImpl(Class<T> type) {
-        this.type = type;
-    }
-
-    public void setTypeArgument(Class<T> type) {
         this.type = type;
     }
 
