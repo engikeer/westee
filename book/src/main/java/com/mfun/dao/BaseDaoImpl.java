@@ -3,6 +3,7 @@ package com.mfun.dao;
 import com.mfun.utils.ConnectionUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
@@ -41,8 +42,9 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     }
 
     @Override
-    public List<T> getBeanList() {
-         return null;
+    public List<T> getBeanList(String sql, Object... params) throws SQLException {
+        QueryRunner runner = ConnectionUtils.getRunner();
+        return runner.query(sql, new BeanListHandler<>(type), params);
     }
 
     // TODO: 之后实现

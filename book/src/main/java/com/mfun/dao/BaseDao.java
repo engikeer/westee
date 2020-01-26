@@ -7,7 +7,7 @@ public interface BaseDao<T> {
 
     T getBean(String sql, Object... params) throws SQLException;
 
-    List<T> getBeanList();
+    List<T> getBeanList(String sql, Object... params) throws SQLException;
 
     boolean updateBean(T bean);
 

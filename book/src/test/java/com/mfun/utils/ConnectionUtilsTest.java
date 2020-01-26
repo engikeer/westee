@@ -25,7 +25,6 @@ public class ConnectionUtilsTest {
                 assertEquals("庄颜", username);
             }
         }
-        ConnectionUtils.closeDataSource();
     }
 
     @Test
@@ -34,6 +33,6 @@ public class ConnectionUtilsTest {
         MapHandler mapHandler = new MapHandler();
         Map<String, Object> result = runner.query("SELECT * FROM bs_user LIMIT 1", mapHandler);
         assertEquals("庄颜", result.get("username"));
-        ConnectionUtils.closeDataSource();
+
     }
 }
