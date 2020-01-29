@@ -1,20 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>订单管理</title>
-<link type="text/css" rel="stylesheet" href="../../static/css/style.css" >
+
+<!-- 头部共享信息的引入。包含jquery，base标签，以及css样式 --> 
+<%@ include file="/pages/common/header.jsp" %>
+
 </head>
 <body>
 	
 	<div id="header">
-			<img class="logo_img" alt="" src="../../static/img/logo.gif" >
+			<img class="logo_img" alt="" src="static/img/logo.gif" >
 			<span class="wel_word">订单管理系统</span>
-			<div>
-				<a href="book_manager.html">图书管理</a>
-				<a href="order_manager.html">订单管理</a>
-				<a href="../../index.html">返回商城</a>
-			</div>
+		
+		<!-- 这是manager管理模块的共同菜单  -->
+		<%@ include file="/pages/common/manager_menu.jsp" %>
+
+
 	</div>
 	
 	<div id="main">
@@ -49,10 +54,9 @@
 		</table>
 	</div>
 	
-	<div id="bottom">
-		<span>
-			尚硅谷书城.Copyright &copy;2015
-		</span>
-	</div>
+	
+	<!-- 这是页脚的引入 -->
+	<%@ include file="/pages/common/footer.jsp" %>
+
 </body>
 </html>

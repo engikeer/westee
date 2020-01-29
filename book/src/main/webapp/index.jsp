@@ -1,9 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>书城首页</title>
-<link type="text/css" rel="stylesheet" href="static/css/style.css" >
+
+<!-- 头部共享信息的引入。包含jquery，base标签，以及css样式 --> 
+<%@ include file="/pages/common/header.jsp" %>
+
 </head>
 <body>
 	
@@ -11,10 +16,10 @@
 			<img class="logo_img" alt="" src="static/img/logo.gif" >
 			<span class="wel_word">网上书城</span>
 			<div>
-				<a href="pages/user/login.html">登录</a> | 
-				<a href="pages/user/regist.html">注册</a> &nbsp;&nbsp;
-				<a href="pages/cart/cart.html">购物车</a>
-				<a href="pages/manager/manager.html">后台管理</a>
+				<a href="pages/user/login.jsp">登录</a> | 
+				<a href="pages/user/regist.jsp">注册</a> &nbsp;&nbsp;
+				<a href="pages/cart/cart.jsp">购物车</a>
+				<a href="pages/manager/manager.jsp">后台管理</a>
 			</div>
 	</div>
 	<div id="main">
@@ -171,10 +176,8 @@
 	
 	</div>
 	
-	<div id="bottom">
-		<span>
-			尚硅谷书城.Copyright &copy;2015
-		</span>
-	</div>
+	<!-- 这是页脚的引入 -->
+	<%@ include file="/pages/common/footer.jsp" %>
+
 </body>
 </html>
