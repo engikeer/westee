@@ -17,6 +17,7 @@ public class BaseServlet extends HttpServlet {
         String action = req.getParameter("action");
         try {
             Method method = this.getClass().getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);
+            // 由于要在父类访问子类的私有方法，必须将私有方法的访问性打开
             method.setAccessible(true);
             method.invoke(this, req, resp);
         } catch (Exception e) {
