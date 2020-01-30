@@ -29,9 +29,11 @@ public class UserServlet extends BaseServlet {
                 resp.sendRedirect(req.getContextPath() + "/pages/user/login_success.jsp");
             }
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            // 代码错误，返回 500 页面
             e.printStackTrace();
             resp.getWriter().println("请求参数值错误");
         } catch (SQLException e) {
+            // 代码错误，返回 500 页面
             e.printStackTrace();
         }
 
@@ -45,6 +47,7 @@ public class UserServlet extends BaseServlet {
             // 注册成功，前往成功页
             resp.sendRedirect(req.getContextPath() + "/pages/user/regist_success.jsp");
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
+            // 代码错误，返回 500 页面
             e.printStackTrace();
             resp.getWriter().println("请求参数值错误");
         } catch (SQLException e) {
