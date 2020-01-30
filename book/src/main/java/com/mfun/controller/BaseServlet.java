@@ -12,6 +12,7 @@ public class BaseServlet extends HttpServlet {
         doPost(req, resp);
     }
 
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String action = req.getParameter("action");
