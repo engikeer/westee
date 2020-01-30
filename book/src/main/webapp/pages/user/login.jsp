@@ -75,14 +75,14 @@
 							<div class="form">
 								<form action="userServlet" method="post">
 									<input type="hidden" name="action" value="login"/>
-									<label>用户名称：</label>
+									<label for="username">用户名称：</label>
 									<input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" 
 										tabindex="1" name="username" id="username"
-										value="<%=request.getAttribute("username") == null ? "" : request.getAttribute("username")%>"
+										value="<%=request.getParameter("username") == null ? "" : request.getParameter("username")%>"
 										/>
 									<br />
 									<br />
-									<label>用户密码：</label>
+									<label for="password">用户密码：</label>
 									<input class="itxt" type="password" placeholder="请输入密码" autocomplete="off" 
 									 	tabindex="1" name="password" id="password"
 									/>

@@ -100,32 +100,32 @@
 								<span class="errorMsg"><%=request.getAttribute("msg") == null ? "" : request.getAttribute("msg")%></span>
 							</div>
 							<div class="form">
-								<form action="userServlet?action=regist" method="post">
-									<label>用户名称：</label>
+								<form action="userServlet?action=logon" method="post">
+									<label for="username">用户名称：</label>
 									<input class="itxt" type="text" placeholder="请输入用户名" autocomplete="off" 
 										tabindex="1" name="username" id="username" 
-										value="<%=request.getAttribute("username") == null ? "" : request.getAttribute("username")%>"
+										value="<%=request.getParameter("username") == null ? "" : request.getParameter("username")%>"
 										/>
 									<br />
 									<br />
-									<label>用户密码：</label>
+									<label for="password">用户密码：</label>
 									<input class="itxt" type="password" placeholder="请输入密码" autocomplete="off" 
 										tabindex="1" name="password" id="password" />
 									<br />
 									<br />
-									<label>确认密码：</label>
+									<label for="repwd">确认密码：</label>
 									<input class="itxt" type="password" placeholder="确认密码" autocomplete="off" 
 										tabindex="1" name="repwd" id="repwd" />
 									<br />
 									<br />
-									<label>电子邮件：</label>
+									<label for="email">电子邮件：</label>
 									<input class="itxt" type="text" placeholder="请输入邮箱地址" autocomplete="off" 
 										tabindex="1" name="email" id="email" 
-										value="<%=request.getAttribute("email") == null ? "" : request.getAttribute("email")%>"
+										value="<%=request.getParameter("email") == null ? "" : request.getParameter("email")%>"
 										/>
 									<br />
 									<br />
-									<label>验证码：</label>
+									<label for="code">验证码：</label>
 									<input class="itxt" type="text" style="width: 150px;" id="code" name="code"/>
 									<img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">									
 									<br />
