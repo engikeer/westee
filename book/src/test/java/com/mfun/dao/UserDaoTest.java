@@ -3,7 +3,6 @@ package com.mfun.dao;
 import com.mfun.dao.user.UserDao;
 import com.mfun.dao.user.UserDaoImpl;
 import com.mfun.pojo.User;
-import com.mfun.utils.ConnectionUtils;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 
