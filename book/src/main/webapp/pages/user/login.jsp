@@ -9,7 +9,6 @@
 <!-- 头部共享信息的引入。包含jquery，base标签，以及css样式 --> 
 <%@ include file="/pages/common/header.jsp" %>
 
-
 <script type="text/javascript">
 	// 页面加载完成之后
 	$(function(){
