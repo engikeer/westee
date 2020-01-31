@@ -46,14 +46,16 @@
             <version>2.3.3</version>
             <scope>provided</scope>
         </dependency>
-        <!-- jstl 表达式 api -->
-        <!-- https://mvnrepository.com/artifact/javax.servlet.jsp.jstl/jstl-api -->
+
+        <!-- jstl 规范 -->
+        <!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-spec -->
         <dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>jstl-api</artifactId>
-            <version>1.2</version>
+            <groupId>org.apache.taglibs</groupId>
+            <artifactId>taglibs-standard-spec</artifactId>
+            <version>1.2.5</version>
         </dependency>
-        <!--jstl 实现 -->
+
+        <!-- jstl 实现 -->
         <!-- https://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl -->
         <dependency>
             <groupId>org.apache.taglibs</groupId>
