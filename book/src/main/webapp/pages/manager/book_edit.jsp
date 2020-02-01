@@ -35,7 +35,8 @@
 		
 		<div id="main">
 			<form action="manager/bookManager" method="post">
-				<input type="hidden" name="action" value="add">
+				<input type="hidden" name="action" value="update">
+				<input type="hidden" name="id" value="${requestScope.book.id}">
 				<table>
 					<tr>
 						<td>名称</td>
@@ -46,11 +47,11 @@
 						<td>操作</td>
 					</tr>		
 					<tr>
-						<td><input name="title" type="text"/></td>
-						<td><input name="price" type="text"/></td>
-						<td><input name="author" type="text"/></td>
-						<td><input name="sales" type="text"/></td>
-						<td><input name="stock" type="text"/></td>
+						<td><input name="title" type="text" value="${requestScope.book.title}"/></td>
+						<td><input name="price" type="text" value="${requestScope.book.price}"/></td>
+						<td><input name="author" type="text" value="${requestScope.book.author}"/></td>
+						<td><input name="sales" type="text" value="${requestScope.book.sales}"/></td>
+						<td><input name="stock" type="text" value="${requestScope.book.stock}"/></td>
 						<td><input type="submit" value="提交"/></td>
 					</tr>	
 				</table>
