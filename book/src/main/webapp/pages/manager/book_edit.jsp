@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +34,8 @@
 		</div>
 		
 		<div id="main">
-			<form action="book_manager.jsp">
+			<form action="manager/bookManager" method="post">
+				<input type="hidden" name="action" value="add">
 				<table>
 					<tr>
 						<td>名称</td>
@@ -43,14 +43,14 @@
 						<td>作者</td>
 						<td>销量</td>
 						<td>库存</td>
-						<td colspan="2">操作</td>
+						<td>操作</td>
 					</tr>		
 					<tr>
-						<td><input name="book_name" type="text" value="时间简史"/></td>
-						<td><input name="book_price" type="text" value="30.00"/></td>
-						<td><input name="book_author" type="text" value="霍金"/></td>
-						<td><input name="book_sales" type="text" value="200"/></td>
-						<td><input name="book_stock" type="text" value="300"/></td>
+						<td><input name="title" type="text"/></td>
+						<td><input name="price" type="text"/></td>
+						<td><input name="author" type="text"/></td>
+						<td><input name="sales" type="text"/></td>
+						<td><input name="stock" type="text"/></td>
 						<td><input type="submit" value="提交"/></td>
 					</tr>	
 				</table>

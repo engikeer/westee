@@ -30,5 +30,14 @@
         <url-pattern>/userServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>bookManager</servlet-name>
+        <servlet-class>com.mfun.controller.BookManagerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>bookManager</servlet-name>
+        <url-pattern>/manager/bookManager</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
