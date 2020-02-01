@@ -17,6 +17,10 @@ public interface BookDao {
 
     Book getBookById(Book book) throws SQLException;
 
+    List<Book> getPageList(int index, int size) throws SQLException;
+
+    int getTotalCount() throws SQLException;
+
     boolean addBook(Book book);
 
     boolean deleteBook(Book book);

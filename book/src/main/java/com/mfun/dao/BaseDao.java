@@ -9,6 +9,8 @@ public interface BaseDao<T> {
 
     List<T> getBeanList(String sql, Object... params) throws SQLException;
 
+    <U> U getScalar(String sql, Object... params) throws SQLException;
+
     boolean updateBean(T bean);
 
     boolean deleteBean(T bean);

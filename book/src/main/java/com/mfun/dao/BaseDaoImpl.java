@@ -4,6 +4,7 @@ import com.mfun.utils.ConnectionUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
@@ -45,6 +46,12 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     public List<T> getBeanList(String sql, Object... params) throws SQLException {
         QueryRunner runner = ConnectionUtils.getRunner();
         return runner.query(sql, new BeanListHandler<>(type), params);
+    }
+
+    @Override
+    public <U> U getScalar(String sql, Object... params) throws SQLException {
+        QueryRunner runner = ConnectionUtils.getRunner();
+        return runner.query(sql, new ScalarHandler<>(), params);
     }
 
     // TODO: 之后实现

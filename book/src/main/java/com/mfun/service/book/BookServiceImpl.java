@@ -3,6 +3,7 @@ package com.mfun.service.book;
 import com.mfun.dao.book.BookDao;
 import com.mfun.dao.book.BookDaoImpl;
 import com.mfun.pojo.Book;
+import com.mfun.pojo.Page;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -18,6 +19,14 @@ public class BookServiceImpl implements BookService {
     @Override
     public Book get(Book book) throws SQLException {
         return bookDao.getBookById(book);
+    }
+
+    @Override
+    public Page<Book> getPage(int pageNo) throws SQLException {
+        Page<Book> page = new Page<>(bookDao.getTotalCount(), pageNo);
+        List<Book> books = bookDao.getPageList(page.getIndex(), page.getPageSize());
+        page.setData(books);
+        return page;
     }
 
     @Override

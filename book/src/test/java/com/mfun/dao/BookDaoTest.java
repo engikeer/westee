@@ -40,4 +40,10 @@ public class BookDaoTest {
         // 删除
         bookDao.deleteBook(book);
     }
+
+    @Test
+    public void getTotalCountTest() throws SQLException {
+        BookDao bookDao = new BookDaoImpl();
+        System.out.println(bookDao.getTotalCount());
+    }
 }
