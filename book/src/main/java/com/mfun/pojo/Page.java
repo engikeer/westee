@@ -6,8 +6,8 @@ import java.util.List;
  * 分页模型
  */
 public class Page<T> {
-    private int pageSize = 4;  // 页面容量，项目指定
-    private int totalCount;  // 总记录条数，来自数据库
+    private static final int pageSize = 4;  // 页面容量，项目指定
+    private final int totalCount;  // 总记录条数，来自数据库
     private int pageNo;  // 当前的页面，来自前端请求
 //    private int pageCount; // 总页面数，总记录数 / 页面容量 + 1
 //    private int index;  // 数据库记录开始的索引，
@@ -56,10 +56,6 @@ public class Page<T> {
 
     public int getTotalCount() {
         return totalCount;
-    }
-
-    public void setTotalCount(int totalCount) {
-        this.totalCount = totalCount;
     }
 
     public int getPageCount() {
