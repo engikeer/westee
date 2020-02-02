@@ -50,11 +50,8 @@ public class Page<T> {
     }
 
     public void setPageNo(int pageNo) {
-        if (pageNo < 1) {
-            this.pageNo = 1;
-        } else {
-            this.pageNo = Math.min(pageNo, getPageCount());
-        }
+        // 1 <= pageNo <= pageCount（如果 pageCount 为 0，pageNo 仍为 1）
+        this.pageNo = Math.max(Math.min(pageNo, getPageCount()), 1);
     }
 
     public int getTotalCount() {

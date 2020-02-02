@@ -30,7 +30,11 @@ public class BookUserServlet extends BaseServlet {
 //            System.out.println("min 格式错误");
         }
         try {
-            max = Double.parseDouble(reqMax);
+            double m = Double.parseDouble(reqMax);
+            // 如果最大价格小于最小价格，返回高于最小价格的所有数据
+            if (m >= min) {
+                max = m;
+            }
         } catch (NumberFormatException e) {
 //            System.out.println("max 格式错误");
         }
