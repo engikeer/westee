@@ -10,6 +10,7 @@ public interface BookService {
     List<Book> getAll() throws SQLException;
     Book get(Book book) throws SQLException;
     Page<Book> getPage(int pageNo) throws SQLException;
+    Page<Book> getPageByPrice(int pageNo, double min, double max) throws SQLException;
     boolean add(Book book);
     boolean update(Book book);
     boolean delete(Book book);

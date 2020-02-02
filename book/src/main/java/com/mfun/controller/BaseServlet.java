@@ -1,9 +1,16 @@
 package com.mfun.controller;
 
+import com.mfun.pojo.Book;
+import com.mfun.pojo.Page;
+import com.mfun.service.book.BookService;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 
 public class BaseServlet extends HttpServlet {
 
@@ -23,6 +30,24 @@ public class BaseServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("错误：没有该请求方法");
+        }
+    }
+
+    static void page(HttpServletRequest req, HttpServletResponse resp,
+                     BookService bookService, String path) {
+        int pageNo = 1;
+        String pn = req.getParameter("pn");
+        try {
+            pageNo = Integer.parseInt(pn);
+        } catch (NumberFormatException e) {
+//            System.out.println("页码参数不存在或格式错误");
+        }
+        try {
+            Page<Book> page = bookService.getPage(pageNo);
+            req.setAttribute("page", page);
+            req.getRequestDispatcher(path).forward(req, resp);
+        } catch (SQLException | IOException | ServletException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -30,6 +30,14 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
+    public Page<Book> getPageByPrice(int pageNo, double min, double max) throws SQLException {
+        Page<Book> page = new Page<>(bookDao.getCountByPrice(min, max), pageNo);
+        List<Book> books = bookDao.getPageByPrice(page.getIndex(), page.getPageSize(), min, max);
+        page.setData(books);
+        return page;
+    }
+
+    @Override
     public boolean add(Book book) {
         return bookDao.addBook(book);
     }

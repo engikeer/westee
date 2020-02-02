@@ -30,20 +30,8 @@ public class BookManagerServlet extends BaseServlet {
     }
 
     private void page(HttpServletRequest req, HttpServletResponse resp) {
-        int pageNo = 1;
-        String pn = req.getParameter("pn");
-        try {
-            pageNo = Integer.parseInt(pn);
-        } catch (NumberFormatException e) {
-            System.out.println("页码参数不存在或格式错误");
-        }
-        try {
-            Page<Book> page = bookService.getPage(pageNo);
-            req.setAttribute("page", page);
-            req.getRequestDispatcher("/pages/manager/book_manager.jsp").forward(req, resp);
-        } catch (SQLException | IOException | ServletException e) {
-            e.printStackTrace();
-        }
+        req.setAttribute("url", "manager/bookManager?action=page");
+        BaseServlet.page(req, resp, bookService, "/pages/manager/book_manager.jsp");
     }
 
 //    private void add(HttpServletRequest req, HttpServletResponse resp) {

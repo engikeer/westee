@@ -38,10 +38,25 @@ public class BookDaoImpl extends BaseDaoImpl<Book> implements BookDao {
     }
 
     @Override
+    public List<Book> getPageByPrice(int index, int size, double min, double max)
+            throws SQLException {
+        String sql = "SELECT *, img_path as imgPath FROM bs_book " +
+                "WHERE price BETWEEN ? AND ? LIMIT ?, ?";
+        return getBeanList(sql, min, max, index, size);
+    }
+
+    @Override
     public int getTotalCount() throws SQLException {
         String sql = "SELECT COUNT(1) FROM bs_book";
         // jdbc 将 count 的返回值封装为 Long 对象
         Long count = getScalar(sql);
+        return count.intValue();
+    }
+
+    @Override
+    public int getCountByPrice(double min, double max) throws SQLException {
+        String sql = "SELECT COUNT(1) FROM bs_book WHERE price BETWEEN ? AND ?";
+        Long count = getScalar(sql, min, max);
         return count.intValue();
     }
 

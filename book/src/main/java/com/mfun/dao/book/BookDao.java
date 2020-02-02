@@ -19,7 +19,11 @@ public interface BookDao {
 
     List<Book> getPageList(int index, int size) throws SQLException;
 
+    List<Book> getPageByPrice(int index, int size, double min, double max) throws SQLException;
+
     int getTotalCount() throws SQLException;
+
+    int getCountByPrice(double min, double max) throws SQLException;
 
     boolean addBook(Book book);
 
