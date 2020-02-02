@@ -63,10 +63,13 @@ public class BookManagerServlet extends BaseServlet {
 //    }
 
     private void delete(HttpServletRequest req, HttpServletResponse resp) {
+//        String pn = req.getParameter("pn");
+        String referer = req.getHeader("Referer");
         try {
             Book book = ServletUtils.param2bean(req, Book.class);
             bookService.delete(book);
-            resp.sendRedirect(req.getContextPath() + "/manager/bookManager?action=page");
+//            resp.sendRedirect(req.getContextPath() + "/manager/bookManager?action=page&pn=" + pn);
+            resp.sendRedirect(referer);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -90,12 +93,19 @@ public class BookManagerServlet extends BaseServlet {
             Book book = ServletUtils.param2bean(req, Book.class);
             // 添加时没有 id 值，beanUtils 赋予的默认为 0；如果 id 不为 0 就是修改已有图书
             if (book.getId() > 0) {
+                String pn = req.getParameter("pn");
                 bookService.update(book);
+                // 回到原来的页面
+                resp.sendRedirect(req.getContextPath() + "/manager/bookManager?action=page&pn=" + pn);
             } else {
                 bookService.add(book);
+                Page<Book> page = bookService.getPage(1);
+                // 回到最后一页
+                resp.sendRedirect(req.getContextPath() + "/manager/bookManager?action=page&pn=" + page.getPageCount());
+
             }
 
-            resp.sendRedirect(req.getContextPath() + "/manager/bookManager?action=page");
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -69,7 +69,7 @@
                 <td>${book.author}</td>
                 <td>${book.sales}</td>
                 <td>${book.stock}</td>
-                <td><a href="manager/bookManager?action=getBook&id=${book.id}">修改</a></td>
+                <td><a href="manager/bookManager?action=getBook&id=${book.id}&pn=${requestScope.page.pageNo}">修改</a></td>
                 <td><a class="deleteBtn" href="manager/bookManager?action=delete&id=${book.id}">删除</a></td>
             </tr>
         </c:forEach>

@@ -37,6 +37,7 @@
 			<form action="manager/bookManager" method="post">
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="id" value="${requestScope.book.id}">
+				<input type="hidden" name="pn" value="${param.pn}">
 				<table>
 					<tr>
 						<td>名称</td>
