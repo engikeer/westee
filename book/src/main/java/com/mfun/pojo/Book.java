@@ -1,6 +1,8 @@
 package com.mfun.pojo;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
 
     private static final String defaultImgPath = "static/img/default.jpg";
 

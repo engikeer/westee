@@ -1,9 +1,11 @@
 package com.mfun.pojo;
 
+import java.io.Serializable;
+
 /**
  * bs_user 表的实体类
  */
-public class User {
+public class User implements Serializable {
     private Integer id;  // Integer 类型可以为空
     private String username;
     private String password;

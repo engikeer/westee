@@ -1,11 +1,12 @@
 package com.mfun.pojo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 分页模型
  */
-public class Page<T> {
+public class Page<T> implements Serializable {
     private static final int pageSize = 4;  // 页面容量，项目指定
     private final int totalCount;  // 总记录条数，来自数据库
     private int pageNo;  // 当前的页面，来自前端请求

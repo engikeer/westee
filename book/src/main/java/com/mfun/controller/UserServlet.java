@@ -8,6 +8,7 @@ import com.mfun.utils.ServletUtils;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -26,6 +27,8 @@ public class UserServlet extends BaseServlet {
                 req.getRequestDispatcher("/pages/user/login.jsp").forward(req, resp);
             } else {
                 // 登陆成功，返回成功页面
+                HttpSession session = req.getSession();
+                session.setAttribute("user", user);
                 resp.sendRedirect(req.getContextPath() + "/pages/user/login_success.jsp");
             }
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
