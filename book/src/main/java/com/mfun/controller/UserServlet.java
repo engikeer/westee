@@ -1,5 +1,7 @@
 package com.mfun.controller;
 
+import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
+
 import com.mfun.pojo.User;
 import com.mfun.service.user.UserService;
 import com.mfun.service.user.UserServiceImpl;
@@ -44,6 +46,17 @@ public class UserServlet extends BaseServlet {
 
     private void logon(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        // 获取用户输入的验证码
+        String code = req.getParameter("code");
+        // 获取验证码的实际值
+        String actualCode = (String) req.getSession().getAttribute(KAPTCHA_SESSION_KEY);
+        if (!actualCode.equals(code)) {
+            // 验证码错误，返回注册页
+            req.setAttribute("msg", "验证码错误");
+            req.getRequestDispatcher("/pages/user/regist.jsp").forward(req, resp);
+            return;
+        }
+
         try {
             User user = ServletUtils.param2bean(req, User.class);
             userService.logon(user);
@@ -59,6 +72,8 @@ public class UserServlet extends BaseServlet {
             req.setAttribute("msg", "用户已存在");
             req.getRequestDispatcher("/pages/user/regist.jsp").forward(req, resp);
         }
+
+
     }
 
     private void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {

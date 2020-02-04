@@ -22,6 +22,15 @@
     </filter-mapping>
 
     <servlet>
+        <servlet-name>kaptchaServlet</servlet-name>
+        <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>kaptchaServlet</servlet-name>
+        <url-pattern>/code.jpg</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>userServlet</servlet-name>
         <servlet-class>com.mfun.controller.UserServlet</servlet-class>
     </servlet>

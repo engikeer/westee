@@ -14,6 +14,13 @@
         // 页面加载完成之后
         $(function(){
 
+            // 点击验证图像刷新
+            $("#codeImg").click(function () {
+                // 修改 src 就会重新发起请求
+                // 要每次发送不同的 src，让浏览器认为是新请求，避免使用缓存的图像
+                $(this).prop("src", "code.jpg?" + Math.random());
+            });
+
             // 给注册按钮添加事件
             $("#sub_btn").click(function(){
 
@@ -125,9 +132,9 @@
                         />
                         <br />
                         <br />
-                        <label for="code">验证码：</label>
-                        <input class="itxt" type="text" style="width: 150px;" id="code" name="code"/>
-                        <img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">
+                        <label for="code">验证码：&nbsp;&nbsp;&nbsp;</label>
+                        <input class="itxt" type="text" style="width: 100px;" id="code" name="code"/>
+                        <img alt="" src="code.jpg" id="codeImg" style="float: right;  width: 100px; height:40px; margin-right: 50px;">
                         <br />
                         <br />
                         <input type="submit" value="注册" id="sub_btn" />
