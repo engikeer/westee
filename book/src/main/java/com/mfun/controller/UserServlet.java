@@ -48,6 +48,7 @@ public class UserServlet extends BaseServlet {
             User user = ServletUtils.param2bean(req, User.class);
             userService.logon(user);
             // 注册成功，前往成功页
+            req.getSession().setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/pages/user/regist_success.jsp");
         } catch (IllegalAccessException | InstantiationException | InvocationTargetException e) {
             // 代码错误，返回 500 页面
@@ -58,6 +59,10 @@ public class UserServlet extends BaseServlet {
             req.setAttribute("msg", "用户已存在");
             req.getRequestDispatcher("/pages/user/regist.jsp").forward(req, resp);
         }
+    }
 
+    private void logout(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        req.getSession().invalidate();
+        resp.sendRedirect(req.getContextPath() + "/index.jsp");
     }
 }
