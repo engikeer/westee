@@ -14,6 +14,10 @@ public class User implements Serializable {
     // 通过反射创建对象时会默认使用无参构造器，所以必须提供
     public User() {}
 
+    public User(Integer id) {
+        this.id = id;
+    }
+
     public User(Integer id, String username, String password, String email) {
         this.id = id;
         this.username = username;

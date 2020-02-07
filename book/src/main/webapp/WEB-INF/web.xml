@@ -66,5 +66,14 @@
         <url-pattern>/user/cart</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>order</servlet-name>
+        <servlet-class>com.mfun.controller.OrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>order</servlet-name>
+        <url-pattern>/user/order</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
