@@ -41,19 +41,22 @@ public class CartServlet extends BaseServlet {
         resp.sendRedirect(req.getHeader("Referer"));
     }
 
-    private void updateItem(HttpServletRequest req, HttpServletResponse resp)
-            throws IOException {
-        try {
-            int count =  Integer.parseInt(req.getParameter("count"));
-            int id = Integer.parseInt(req.getParameter("id"));
-            Cart cart = (Cart) req.getSession().getAttribute("cart");
-            cartService.updateCount(cart, id, count);
-        } catch (NumberFormatException e) {
-            // 返回错误信息
-//            System.out.println("count 格式错误");
-        }
-        resp.sendRedirect(req.getHeader("Referer"));
-    }
+//    private void updateItem(HttpServletRequest req, HttpServletResponse resp)
+//            throws IOException {
+//        try {
+//            int count =  Integer.parseInt(req.getParameter("count"));
+//            if (count < 1) {
+//                throw new NumberFormatException("数量小于1");
+//            }
+//            int id = Integer.parseInt(req.getParameter("id"));
+//            Cart cart = (Cart) req.getSession().getAttribute("cart");
+//            cartService.updateCount(cart, id, count);
+//        } catch (NumberFormatException e) {
+//            // 返回错误信息
+////            System.out.println("count 格式错误");
+//        }
+//        resp.sendRedirect(req.getHeader("Referer"));
+//    }
 
     /**
      * ajax版--更新购物车商品数量
@@ -62,6 +65,9 @@ public class CartServlet extends BaseServlet {
             throws IOException {
         try {
             int count =  Integer.parseInt(req.getParameter("count"));
+            if (count < 1) {
+                throw new NumberFormatException("数量小于1");
+            }
             int id = Integer.parseInt(req.getParameter("id"));
             Cart cart = (Cart) req.getSession().getAttribute("cart");
             cartService.updateCount(cart, id, count);
