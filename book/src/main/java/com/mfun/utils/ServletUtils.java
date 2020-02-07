@@ -1,8 +1,10 @@
 package com.mfun.utils;
 
+import com.mfun.pojo.Cart;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -54,5 +56,15 @@ public class ServletUtils {
         Map<String, String[]> parameterMap = req.getParameterMap();
         BeanUtils.populate(t, parameterMap);
         return t;
+    }
+
+    public static Cart getCart(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new Cart();
+            session.setAttribute("cart", cart);
+        }
+        return cart;
     }
 }

@@ -57,5 +57,14 @@
         <url-pattern>/user/bookUser</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>cart</servlet-name>
+        <servlet-class>com.mfun.controller.CartServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cart</servlet-name>
+        <url-pattern>/user/cart</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

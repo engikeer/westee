@@ -31,10 +31,23 @@
             </form>
         </div>
         <div style="text-align: center">
-            <span>您的购物车中有3件商品</span>
-            <div>
-                您刚刚将<span style="color: red">时间简史</span>加入到了购物车中
-            </div>
+            <c:choose>
+                <%-- 购物车为空 --%>
+                <c:when test="${ empty sessionScope.cart.items }">
+                    <span>您的购物车为空！</span>
+                    <div> &nbsp; </div>
+                </c:when>
+                <c:otherwise>
+                    <span>您的购物车中有${ sessionScope.cart.totalCount }件商品</span>
+                    <c:if test="${!empty sessionScope.lastAdded}">
+                        <div>
+                            您刚刚将<span style="color: red">${ sessionScope.lastAdded }</span>加入到了购物车中
+                        </div>
+                        <c:remove var="lastAdded" scope="session" />
+                    </c:if>
+
+                </c:otherwise>
+            </c:choose>
         </div>
 
         <c:forEach items="${requestScope.page.data}" var="item">
@@ -64,7 +77,7 @@
                         <span class="sp2">${ item.stock }</span>
                     </div>
                     <div class="book_add">
-                        <button>加入购物车</button>
+                        <a style="color: blue" href="user/cart?action=add&id=${item.id}">加入购物车</a>
                     </div>
                 </div>
             </div>
