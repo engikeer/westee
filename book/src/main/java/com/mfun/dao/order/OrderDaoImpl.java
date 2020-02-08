@@ -10,6 +10,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import java.beans.PropertyDescriptor;
+import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
@@ -62,11 +63,16 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 //        return runner.query(sql, handler, params);
 //    }
 
-    // TODO: 实现将 orderStatus.values 映射到数据库列
+    // TODO: 实现将 orderStatus 映射到整数列 status
 //    private class MyBeanProcessor extends BeanProcessor {
 //        @Override
-//        protected int[] mapColumnsToProperties(ResultSetMetaData rsmd, PropertyDescriptor[] props) throws SQLException {
-//            return super.mapColumnsToProperties(rsmd, props);
+//        public <T> T toBean(ResultSet rs, Class<? extends T> type) throws SQLException {
+//            return super.toBean(rs, type);
+//        }
+//
+//        @Override
+//        public <T> List<T> toBeanList(ResultSet rs, Class<? extends T> type) throws SQLException {
+//            return super.toBeanList(rs, type);
 //        }
 //    }
 }
