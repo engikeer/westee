@@ -11,7 +11,8 @@ public class Order implements Serializable {
     private Date createDate;
     private double totalPrice;
     // TODO: 将 status 改为 OrderStatus，通过重写映射函数在数据库中保存整数，对象中保存枚举值
-    // 在 BaseDaoImpl 中重写 RowProcessor 并传给 Handler 的构造函数
+    // 在 OrderDaoImpl 中重写 getBeanList、getBean 方法，继承 BeanProcessor 并重写 mapColumnsToProperties
+    // 将新对象传给 Handler 的构造函数
 //    private OrderStatus status;
     private int status;
     private int userId;
