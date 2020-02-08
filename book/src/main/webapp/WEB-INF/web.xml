@@ -68,7 +68,7 @@
 
     <servlet>
         <servlet-name>order</servlet-name>
-        <servlet-class>com.mfun.controller.OrderServlet</servlet-class>
+        <servlet-class>com.mfun.controller.UserOrderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>order</servlet-name>

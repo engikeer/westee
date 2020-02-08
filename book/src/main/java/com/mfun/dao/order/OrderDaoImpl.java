@@ -27,14 +27,14 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 
     @Override
     public List<Order> getList() throws SQLException {
-        String sql = "SELECT order_id orderId, create_date createDate," +
+        String sql = "SELECT order_id orderId, create_time createDate," +
                 " total_price totalPrice, status, user_id userId FROM bs_order";
         return getBeanList(sql);
     }
 
     @Override
     public List<Order> getListForUser(int userId) throws SQLException {
-        String sql = "SELECT order_id orderId, create_date createDate," +
+        String sql = "SELECT order_id orderId, create_time createDate," +
                 " total_price totalPrice, status, user_id userId" +
                 " FROM bs_order WHERE user_id=?";
         return getBeanList(sql, userId);

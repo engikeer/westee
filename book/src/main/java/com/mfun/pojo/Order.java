@@ -10,6 +10,8 @@ public class Order implements Serializable {
     private String orderId;  // 订单号，有意义的唯一标识，不用于计算。简单实现：时间戳 + 用户 id
     private Date createDate;
     private double totalPrice;
+    // TODO: 将 status 改为 OrderStatus，通过重写映射函数在数据库中保存整数，对象中保存枚举值
+    // 在 BaseDaoImpl 中重写 BeanProcessor 并传给 Handler 的构造函数
     private int status;
     private int userId;
 
