@@ -63,7 +63,7 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 //        return runner.query(sql, handler, params);
 //    }
 
-    // TODO: 实现将 orderStatus 映射到整数列 status
+    // 通过索引表实现，不再需要转换
 //    private class MyBeanProcessor extends BeanProcessor {
 //        @Override
 //        public <T> T toBean(ResultSet rs, Class<? extends T> type) throws SQLException {
@@ -73,6 +73,11 @@ public class OrderDaoImpl extends BaseDaoImpl<Order> implements OrderDao {
 //        @Override
 //        public <T> List<T> toBeanList(ResultSet rs, Class<? extends T> type) throws SQLException {
 //            return super.toBeanList(rs, type);
+//        }
+//
+//        @Override
+//        protected Object processColumn(ResultSet rs, int index, Class<?> propType) throws SQLException {
+//            return super.processColumn(rs, index, propType);
 //        }
 //    }
 }
