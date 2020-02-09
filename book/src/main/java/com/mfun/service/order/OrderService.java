@@ -17,7 +17,7 @@ public interface OrderService {
      */
     String checkout(Cart cart, User user) throws SQLException;
     boolean updateStatus(String orderId, int status);
-    List<Order> getAllOrder() throws SQLException;
+    List<Order> getAllOrders() throws SQLException;
     List<Order> getOrderForUser(int userId) throws SQLException;
 
     List<OrderItem> getOrderItems(String orderId) throws SQLException;

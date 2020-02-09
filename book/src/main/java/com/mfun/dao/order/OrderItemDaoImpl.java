@@ -25,4 +25,19 @@ public class OrderItemDaoImpl extends BaseDaoImpl<OrderItem> implements OrderIte
         return update(sql, item.getBookId(), item.getTitle(),
                 item.getPrice(), item.getCount(), item.getOrderId());
     }
+
+    @Override
+    public int[] batchSave(List<OrderItem> items) throws SQLException {
+        String sql = "INSERT INTO bs_order_item VALUES (null, ?, ?, ?, ?, ?)";
+        int n = items.size();
+        // params 第一维是执行几次，第二维是参数数量，所以，param[i] 就是一条语句所需的所有参数
+        Object[][] params = new Object[n][5];
+        for (int i = 0; i < n; i++) {
+            OrderItem item = items.get(i);
+            params[i] = new Object[] {item.getBookId(), item.getTitle(),
+                    item.getPrice(), item.getCount(), item.getOrderId()};
+        }
+
+        return batchUpdate(sql, params);
+    }
 }

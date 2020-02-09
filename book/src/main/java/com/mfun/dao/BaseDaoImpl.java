@@ -71,4 +71,11 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
         QueryRunner runner = ConnectionUtils.getRunner();
         return runner.update(sql, params);
     }
+
+    @Override
+    public int[] batchUpdate(String sql, Object[][] params) throws SQLException {
+        QueryRunner runner = ConnectionUtils.getRunner();
+        // params 第一维是执行几次，第二维是参数数量，所以，param[i] 就是一条语句所需的所有参数
+        return runner.batch(sql, params);
+    }
 }

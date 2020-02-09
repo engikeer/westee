@@ -5,6 +5,7 @@ import com.mfun.pojo.Order;
 import com.mfun.pojo.User;
 import com.mfun.service.order.OrderService;
 import com.mfun.service.order.OrderServiceImpl;
+import com.mfun.utils.OrderStatus;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -50,5 +51,13 @@ public class UserOrderServlet extends BaseServlet {
         List<Order> orders = orderService.getOrderForUser(user.getId());
         req.setAttribute("orders", orders);
         req.getRequestDispatcher("/pages/order/order.jsp").forward(req, resp);
+    }
+
+    private void receive(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException {
+        String orderId = req.getParameter("orderId");
+        orderService.updateStatus(orderId, OrderStatus.COMPLETED.getValue());
+        String referer = req.getHeader("referer");
+        resp.sendRedirect(referer);
     }
 }

@@ -67,12 +67,21 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>order</servlet-name>
+        <servlet-name>userOrder</servlet-name>
         <servlet-class>com.mfun.controller.UserOrderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>order</servlet-name>
+        <servlet-name>userOrder</servlet-name>
         <url-pattern>/user/order</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>managerOrder</servlet-name>
+        <servlet-class>com.mfun.controller.ManagerOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>managerOrder</servlet-name>
+        <url-pattern>/manager/order</url-pattern>
     </servlet-mapping>
 
 

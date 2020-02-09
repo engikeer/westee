@@ -9,6 +9,7 @@ import com.mfun.dao.order.OrderItemDaoImpl;
 import com.mfun.pojo.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -32,10 +33,11 @@ public class OrderServiceImpl implements OrderService {
         order.setTotalPrice(cart.getTotalPrice());
         order.setStatus(Order.STATUS_UNFILLED);
         order.setUserId(user.getId());
-        // 3. 保存订单对象
+        // 3. 保存订单
         orderDao.save(order);
 
         // 4. 封装订单项对象
+        List<OrderItem> orderItems = new ArrayList<>();
         for (CartItem item : cart.getItems().values()) {
             OrderItem orderItem = new OrderItem();
             int bookId = item.getBook().getId();
@@ -46,13 +48,18 @@ public class OrderServiceImpl implements OrderService {
             orderItem.setCount(count);
             orderItem.setOrderId(orderId);
             // 5. 保存订单项
-            itemDao.save(orderItem);
+//            itemDao.save(orderItem);
+            // 批量保存，减少与数据库交互的次数
+            orderItems.add(orderItem);
             // 6. 修改图书库存
             Book book = bookDao.getBookById(new Book(bookId));
             book.setSales(book.getSales() + count);
             book.setStock(book.getStock() - count);
             bookDao.updateBook(book);
         }
+        // 5. 保存订单项
+        itemDao.batchSave(orderItems);
+
         return orderId;
     }
 
@@ -68,7 +75,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<Order> getAllOrder() throws SQLException {
+    public List<Order> getAllOrders() throws SQLException {
         return orderDao.getList();
     }
 

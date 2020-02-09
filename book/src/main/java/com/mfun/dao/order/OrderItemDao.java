@@ -8,4 +8,5 @@ import java.util.List;
 public interface OrderItemDao {
     List<OrderItem> getListForOrder(String orderId) throws SQLException;
     int save(OrderItem item) throws SQLException;
+    int[] batchSave(List<OrderItem> items) throws SQLException;
 }

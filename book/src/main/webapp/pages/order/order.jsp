@@ -46,7 +46,16 @@
                     <td>${order.orderId}</td>
                     <td>${order.createDate}</td>
                     <td>${order.totalPrice}</td>
-                    <td>${order.statusDesc}</td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${order.status == 1}">
+                                <a href="user/order?action=receive&orderId=${ order.orderId }">确认收货</a>
+                            </c:when>
+                            <c:otherwise>
+                                ${order.statusDesc}
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td>
                         <a href="">查看详情</a>
                     </td>
