@@ -1,12 +1,14 @@
 package com.mfun.service.order;
 
-import com.mfun.dao.book.BookDao;
-import com.mfun.dao.book.BookDaoImpl;
 import com.mfun.dao.order.OrderDao;
 import com.mfun.dao.order.OrderDaoImpl;
 import com.mfun.dao.order.OrderItemDao;
 import com.mfun.dao.order.OrderItemDaoImpl;
 import com.mfun.pojo.*;
+import com.mfun.service.book.BookService;
+import com.mfun.service.book.BookServiceImpl;
+import com.mfun.service.cart.CartService;
+import com.mfun.service.cart.CartServiceImpl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -16,7 +18,8 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     OrderItemDao itemDao = new OrderItemDaoImpl();
     OrderDao orderDao = new OrderDaoImpl();
-    BookDao bookDao = new BookDaoImpl();
+    BookService bookService = new BookServiceImpl();
+    CartService cartService = new CartServiceImpl();
 
     @Override
     public String checkout(Cart cart, User user) throws SQLException {
@@ -52,13 +55,17 @@ public class OrderServiceImpl implements OrderService {
             // 批量保存，减少与数据库交互的次数
             orderItems.add(orderItem);
             // 6. 修改图书库存
-            Book book = bookDao.getBookById(new Book(bookId));
+            Book book = bookService.get(new Book(bookId));
+            // TODO: 多人同时修改库存如何保证原子性和可见性？
             book.setSales(book.getSales() + count);
             book.setStock(book.getStock() - count);
-            bookDao.updateBook(book);
+            bookService.update(book);
         }
         // 5. 保存订单项
         itemDao.batchSave(orderItems);
+
+        // 7. 清空购物车
+        cartService.clearCart(cart);
 
         return orderId;
     }
