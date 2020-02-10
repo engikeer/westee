@@ -1,12 +1,14 @@
 package com.mfun.dao;
 
 import com.mfun.utils.ConnectionUtils;
+import com.mfun.utils.ThreadConnection;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.lang.reflect.ParameterizedType;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -38,20 +40,35 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
     @Override
     public T getBean(String sql, Object... params)
             throws SQLException {
-        QueryRunner runner = ConnectionUtils.getRunner();
-        return runner.query(sql, new BeanHandler<>(type), params);
+        // 普通方法
+//        QueryRunner runner = ConnectionUtils.getRunner();
+//        return runner.query(sql, new BeanHandler<>(type), params);
+        // 事务性方法
+        Connection conn = ThreadConnection.getCurrentConnection();
+        QueryRunner runner = new QueryRunner();
+        return runner.query(conn, sql, new BeanHandler<>(type), params);
     }
 
     @Override
     public List<T> getBeanList(String sql, Object... params) throws SQLException {
-        QueryRunner runner = ConnectionUtils.getRunner();
-        return runner.query(sql, new BeanListHandler<>(type), params);
+        // 普通方法
+//        QueryRunner runner = ConnectionUtils.getRunner();
+//        return runner.query(sql, new BeanListHandler<>(type), params);
+        // 事务性方法
+        Connection conn = ThreadConnection.getCurrentConnection();
+        QueryRunner runner = new QueryRunner();
+        return runner.query(conn, sql, new BeanListHandler<>(type), params);
     }
 
     @Override
     public <U> U getScalar(String sql, Object... params) throws SQLException {
-        QueryRunner runner = ConnectionUtils.getRunner();
-        return runner.query(sql, new ScalarHandler<>(), params);
+        // 普通方法
+//        QueryRunner runner = ConnectionUtils.getRunner();
+//        return runner.query(sql, new ScalarHandler<>(), params);
+        // 事务性方法
+        Connection conn = ThreadConnection.getCurrentConnection();
+        QueryRunner runner = new QueryRunner();
+        return runner.query(conn, sql, new ScalarHandler<>(), params);
     }
 
     // TODO: 之后实现
@@ -68,14 +85,24 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 
     @Override
     public int update(String sql, Object... params) throws SQLException {
-        QueryRunner runner = ConnectionUtils.getRunner();
-        return runner.update(sql, params);
+        // 普通方法
+//        QueryRunner runner = ConnectionUtils.getRunner();
+//        return runner.update(sql, params);
+        // 事务性方法
+        Connection conn = ThreadConnection.getCurrentConnection();
+        QueryRunner runner = new QueryRunner();
+        return runner.update(conn, sql, params);
     }
 
     @Override
     public int[] batchUpdate(String sql, Object[][] params) throws SQLException {
-        QueryRunner runner = ConnectionUtils.getRunner();
-        // params 第一维是执行几次，第二维是参数数量，所以，param[i] 就是一条语句所需的所有参数
-        return runner.batch(sql, params);
+        // 普通方法
+//        QueryRunner runner = ConnectionUtils.getRunner();
+//        // params 第一维是执行几次，第二维是参数数量，所以，param[i] 就是一条语句所需的所有参数
+//        return runner.batch(sql, params);
+        // 事务性方法
+        Connection conn = ThreadConnection.getCurrentConnection();
+        QueryRunner runner = new QueryRunner();
+        return runner.batch(conn, sql, params);
     }
 }
