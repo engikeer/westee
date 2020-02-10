@@ -37,8 +37,6 @@ public class OrderItemDaoImpl extends BaseDaoImpl<OrderItem> implements OrderIte
             params[i] = new Object[] {item.getBookId(), item.getTitle(),
                     item.getPrice(), item.getCount(), item.getOrderId()};
         }
-
-        throw new SQLException("生成异常");
-//        return batchUpdate(sql, params);
+        return batchUpdate(sql, params);
     }
 }
