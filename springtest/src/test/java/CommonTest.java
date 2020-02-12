@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
+@ExtendWith(PersonResolver.class)
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class CommonTest {
@@ -24,6 +25,11 @@ public class CommonTest {
     @Test
     public void test() {
         System.out.println(person.getCar());
+    }
+
+    @Test
+    public void getPerson(Person wan) {
+        System.out.println(wan.getName());
     }
 
     @Test
