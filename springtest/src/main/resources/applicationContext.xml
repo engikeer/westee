@@ -22,9 +22,7 @@
 <!--    <bean id="person01" class="com.mfun.bean.Person" p:car-ref="car01"/>-->
 <!--    <bean id="car01" class="com.mfun.bean.Car" p:name="奥迪" p:price="51000" />-->
 
-
-
-    <context:component-scan base-package="com.mfun.bean" />
+    <context:component-scan base-package="com.mfun" />
 
     <context:property-placeholder location="classpath:db.properties" />
     <bean id="dataSourceConfig" class="com.zaxxer.hikari.HikariConfig">

@@ -1,4 +1,5 @@
 import com.mfun.bean.Person;
+import com.mfun.service.PersonService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,14 @@ public class CommonTest {
     private Person person;
     @Autowired
     private DataSource dataSource;
+
+    @Autowired
+    private PersonService personService;
+
+    @Test
+    void service() {
+        System.out.println(personService.getPerson().getName());
+    }
 
     @Test
     public void test() {
