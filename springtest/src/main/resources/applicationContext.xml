@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       https://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- 每个 bean 注册一个组件 -->
+    <!-- 注册Person，id 是标识，用于获取该组件 -->
+    <!--    <bean id="person01" class="com.mfun.bean.Person">-->
+    <!--        <property name="name" value="秦海" />-->
+    <!--        <property name="age" value="19" />-->
+    <!--        <property name="gender" value="男" />-->
+    <!--        <property name="email" value="hai@tt.tt" />-->
+    <!--    </bean>-->
+    <!--    <bean id="person01" class="com.mfun.bean.Person"-->
+    <!--          p:name="秦海" p:age="19" p:gender="男" p:email="hai@tt.tt" />-->
+<!--    <bean id="person01" class="com.mfun.bean.Person" p:car-ref="car01"/>-->
+<!--    <bean id="car01" class="com.mfun.bean.Car" p:name="奥迪" p:price="51000" />-->
+
+
+
+    <context:component-scan base-package="com.mfun.bean" />
+
+    <context:property-placeholder location="classpath:db.properties" />
+    <bean id="dataSourceConfig" class="com.zaxxer.hikari.HikariConfig">
+        <property name="jdbcUrl" value="${dataSource.jdbcUrl}" />
+        <property name="username" value="${dataSource.username}" />
+        <property name="password" value="${dataSource.password}" />
+    </bean>
+
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <constructor-arg name="configuration" ref="dataSourceConfig" />
+    </bean>
+
+</beans>

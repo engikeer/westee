@@ -1,20 +1,41 @@
 import com.mfun.bean.Person;
 import org.junit.jupiter.api.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
+import javax.sql.DataSource;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class CommonTest {
-    private ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+    @Autowired
+    private Person person;
+    @Autowired
+    private DataSource dataSource;
 
     @Test
     public void test() {
-        // ApplicationContext 代表 IoC 容器
-        // 实现类是类路径下的 xml 配置的 IoC 容器，传入配置文件在类路径下的位置
-        // 通过 id 获取 bean
-        Person person01 = (Person) ioc.getBean("person01");
-        System.out.println(person01.getCar());
+        System.out.println(person.getCar());
+    }
+
+    @Test
+    public void getConnection() throws SQLException {
+        try (Connection connection = dataSource.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM bs_user");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String username = resultSet.getString("username");
+                System.out.println("user: " + username);
+            }
+
+        }
     }
 }
