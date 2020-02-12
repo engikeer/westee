@@ -20,6 +20,7 @@
         <module>smbms</module>
         <module>book</module>
         <module>ssm</module>
+        <module>springtest</module>
     </modules>
 
     <dependencies>
