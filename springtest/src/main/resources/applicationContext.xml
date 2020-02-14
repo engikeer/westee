@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        https://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 每个 bean 注册一个组件 -->
     <!-- 注册Person，id 是标识，用于获取该组件 -->
@@ -23,16 +26,33 @@
 <!--    <bean id="car01" class="com.mfun.bean.Car" p:name="奥迪" p:price="51000" />-->
 
     <context:component-scan base-package="com.mfun" />
+    <aop:aspectj-autoproxy />
 
-    <context:property-placeholder location="classpath:db.properties" />
-    <bean id="dataSourceConfig" class="com.zaxxer.hikari.HikariConfig">
-        <property name="jdbcUrl" value="${dataSource.jdbcUrl}" />
-        <property name="username" value="${dataSource.username}" />
-        <property name="password" value="${dataSource.password}" />
-    </bean>
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="add" expression="execution(public int com.mfun.proxy.Calculator.div(int, int))"/>-->
+<!--        <aop:aspect ref="logUtil">-->
+<!--            <aop:after-returning method="returning" pointcut-ref="add" returning="result" />-->
+<!--            <aop:around method="around" pointcut-ref="add" />-->
+<!--            <aop:after-throwing method="throwing" pointcut-ref="add" throwing="e" />-->
+<!--            <aop:after method="ff" pointcut-ref="add" />-->
+<!--            <aop:before method="start" pointcut-ref="add" />-->
+<!--        </aop:aspect>-->
 
-    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
-        <constructor-arg name="configuration" ref="dataSourceConfig" />
-    </bean>
+<!--        <aop:aspect ref="...">-->
+<!--            ....-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+
+<!--    <context:property-placeholder location="classpath:db.properties" />-->
+<!--    <bean id="dataSourceConfig" class="com.zaxxer.hikari.HikariConfig">-->
+<!--        <property name="jdbcUrl" value="${dataSource.jdbcUrl}" />-->
+<!--        <property name="username" value="${dataSource.username}" />-->
+<!--        <property name="password" value="${dataSource.password}" />-->
+<!--    </bean>-->
+
+<!--    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">-->
+<!--        <constructor-arg name="configuration" ref="dataSourceConfig" />-->
+<!--    </bean>-->
 
 </beans>
