@@ -4,13 +4,16 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
        https://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/aop
-       http://www.springframework.org/schema/aop/spring-aop.xsd">
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
 
     <!-- 每个 bean 注册一个组件 -->
     <!-- 注册Person，id 是标识，用于获取该组件 -->
@@ -44,15 +47,43 @@
 <!--    </aop:config>-->
 
 
-<!--    <context:property-placeholder location="classpath:db.properties" />-->
-<!--    <bean id="dataSourceConfig" class="com.zaxxer.hikari.HikariConfig">-->
-<!--        <property name="jdbcUrl" value="${dataSource.jdbcUrl}" />-->
-<!--        <property name="username" value="${dataSource.username}" />-->
-<!--        <property name="password" value="${dataSource.password}" />-->
+    <context:property-placeholder location="classpath:db.properties" file-encoding="UTF-8"/>
+
+    <!-- 数据源 -->
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <constructor-arg>
+            <props>
+                <prop key="jdbcUrl">${jdbcUrl}</prop>
+                <prop key="username">${username}</prop>
+                <prop key="password">${password}</prop>
+                <prop key="dataSource.cachePrepStmts">${dataSource.cachePrepStmts}</prop>
+                <prop key="dataSource.prepStmtCacheSize">${dataSource.prepStmtCacheSize}</prop>
+                <prop key="dataSource.prepStmtCacheSqlLimit">${dataSource.prepStmtCacheSqlLimit}</prop>
+                <prop key="dataSource.useServerPrepStmts">${dataSource.useServerPrepStmts}</prop>
+                <prop key="dataSource.useLocalSessionState">${dataSource.useLocalSessionState}</prop>
+                <prop key="dataSource.rewriteBatchedStatements">${dataSource.rewriteBatchedStatements}</prop>
+                <prop key="dataSource.cacheResultSetMetadata">${dataSource.cacheResultSetMetadata}</prop>
+                <prop key="dataSource.cacheServerConfiguration">${dataSource.cacheServerConfiguration}</prop>
+                <prop key="dataSource.elideSetAutoCommits">${dataSource.elideSetAutoCommits}</prop>
+                <prop key="dataSource.maintainTimeStats">${dataSource.maintainTimeStats}</prop>
+            </props>
+        </constructor-arg>
+    </bean>
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">
+        <constructor-arg ref="hikariConfig"/>
+    </bean>
+
+    <!-- jdbcTemplate -->
+<!--    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
+<!--        <constructor-arg name="dataSource" ref="dataSource" />-->
 <!--    </bean>-->
 
-<!--    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource">-->
-<!--        <constructor-arg name="configuration" ref="dataSourceConfig" />-->
-<!--    </bean>-->
+    <!-- 事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- 基于注解的事务控制 -->
+    <tx:annotation-driven />
 
 </beans>

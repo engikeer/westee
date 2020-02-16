@@ -1,4 +1,5 @@
 import com.mfun.proxy.Calculator;
+import com.zaxxer.hikari.HikariConfig;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
