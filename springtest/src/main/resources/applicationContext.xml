@@ -86,4 +86,23 @@
     <!-- 基于注解的事务控制 -->
     <tx:annotation-driven />
 
+    <!-- 基于配置的事务控制 -->
+<!--    <bean id="bookService" class="com.mfun.service.BookServiceImpl" />-->
+
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="txPointcut" expression="execution(* com.mfun.servi*.*.*(..))"/>-->
+<!--        &lt;!&ndash; 配置事务通知，advice-ref 指定使用的 tx:advice，切入点表达式指定会被切入的方法，被切入的方法不一定都有事务行为 &ndash;&gt;-->
+<!--        <aop:advisor advice-ref="myAdvice" pointcut-ref="txPointcut"/>-->
+<!--    </aop:config>-->
+
+<!--    <tx:advice id="myAdvice" transaction-manager="transactionManager">-->
+<!--        <tx:attributes>-->
+<!--            &lt;!&ndash; 指定需要有事务行为的方法 &ndash;&gt;-->
+<!--            <tx:method name="*"/>-->
+<!--            <tx:method name="checkout" isolation="READ_COMMITTED" propagation="REQUIRES_NEW"/>-->
+<!--            <tx:method name="get*" read-only="true" />-->
+<!--        </tx:attributes>-->
+<!--    </tx:advice>-->
+
+
 </beans>
