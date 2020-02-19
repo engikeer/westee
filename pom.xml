@@ -21,6 +21,7 @@
         <module>book</module>
         <module>ssm</module>
         <module>springtest</module>
+        <module>spmvc</module>
     </modules>
 
     <dependencies>
