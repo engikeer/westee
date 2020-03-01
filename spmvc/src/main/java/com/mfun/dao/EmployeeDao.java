@@ -1,6 +1,5 @@
 package com.mfun.dao;
 
-import com.mfun.bean.Department;
 import com.mfun.bean.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
