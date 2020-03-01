@@ -105,4 +105,7 @@
 <!--    </tx:advice>-->
 
 
+    <bean id="car" class="com.mfun.bean.Car">
+        <property name="name" value="奥迪" />
+    </bean>
 </beans>

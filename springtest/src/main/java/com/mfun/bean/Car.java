@@ -2,7 +2,6 @@ package com.mfun.bean;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class Car {
     private String name;
     private double price;
