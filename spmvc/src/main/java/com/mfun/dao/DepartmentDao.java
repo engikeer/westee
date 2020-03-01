@@ -9,9 +9,9 @@ import java.util.Map;
 
 @Repository
 public class DepartmentDao {
-    private static Map<Integer, Department> departmentMap = new HashMap<>();
+    private final Map<Integer, Department> departmentMap = new HashMap<>();
 
-    static {
+    public DepartmentDao() {
         departmentMap.put(101, new Department(101,"人事院"));
         departmentMap.put(102, new Department(102,"内阁府"));
         departmentMap.put(103, new Department(103,"总务省"));
