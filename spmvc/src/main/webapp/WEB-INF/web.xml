@@ -55,7 +55,7 @@
         <!-- 拦截所有请求，使用 / -->
         <!-- /* 也拦截所有请求，但会拦截 *.jsp 的请求，导致必须为所有 jsp 页面创建映射。-->
         <!-- 而 / 不会拦截 jsp 请求 -->
-        <url-pattern>/app/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
 </web-app>
