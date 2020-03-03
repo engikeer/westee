@@ -1,10 +1,17 @@
 package com.mfun.bean;
 
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class Employee implements Serializable {
     private Integer id;
+    @NotEmpty
+    @Length(min = 2, max = 24)
     private String name;
+    @Email
     private String email;
     private Integer gender;  // 0 = female, 1 = male
     private Department department;

@@ -7,9 +7,16 @@ import com.mfun.dao.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class EmployeeController {
@@ -29,19 +36,31 @@ public class EmployeeController {
         return "list";
     }
 
-    @GetMapping("/add")
-    public String toAdd(ModelMap map) {
+    @RequestMapping(value = "/add", method = {RequestMethod.GET, RequestMethod.POST})
+    public String toAdd(ModelMap map, HttpServletRequest request) {
         Collection<Department> departments = departmentDao.getAll();
         map.addAttribute("departments", departments);
-        map.addAttribute("employee", new Employee());
+        if (request.getAttribute("employee") == null) {
+            map.addAttribute("employee", new Employee());
+        }
         return "add";
     }
 
     @PostMapping("/employee")
-    public String addEmployee(Employee employee) {
-
-        employeeDao.save(employee);
-        return "redirect:/employees";
+    public String addEmployee(@Valid Employee employee, BindingResult bindingResult, ModelMap map) {
+        // 判断是否有校验错误
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errorMap = new HashMap<>();
+            List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+            for (FieldError error : fieldErrors) {
+                errorMap.put(error.getField(), error.getDefaultMessage());
+            }
+            map.addAttribute("errors", errorMap);
+           return "forward:/add";
+        } else {
+            employeeDao.save(employee);
+            return "redirect:/employees";
+        }
     }
 
     @GetMapping("/employee/{id}")

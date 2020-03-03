@@ -11,17 +11,17 @@
 <form:form action="${pageContext.request.contextPath}/employee" method="post" modelAttribute="employee">
     <label for="name">姓名：</label>
     <!-- path 是提交时的参数，也是回显对象的属性名。path 还会默认作为该标签的 id -->
-    <form:input path="name" />
+    <form:input path="name" />${requestScope.errors.name}
     <br>
     <label for="email">Email：</label>
-    <form:input path="email" />
+    <form:input path="email" /><form:errors path="email"/>${requestScope.errors.email}
     <br>
     性别：<label for="male">男</label>
     <form:radiobutton path="gender" value="1" id="male" />
     <label for="female">女</label>
     <form:radiobutton path="gender" value="0" id="female" />
     <br>
-    <label for="department">部门：</label>
+    <label for="department">部门：</label><form:errors path="department"/>
     <!-- items 指定要遍历的集合，itemLabel 和 itemValue 指定作为标签和值的"属性名"-->
     <form:select path="department.id" id="department" items="${requestScope.departments}" itemLabel="name" itemValue="id"/>
     <br>
