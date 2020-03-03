@@ -14,6 +14,9 @@
     <!-- 指定 SpringMVC 使用的 conversionService -->
     <mvc:annotation-driven conversion-service="myConversionService"/>
 
+    <!-- DispacherServlet 不拦截未配置的请求 -->
+    <mvc:default-servlet-handler/>
+
     <!-- 配置 conversionService -->
     <bean id="myConversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters">
@@ -22,9 +25,6 @@
             </set>
         </property>
     </bean>
-
-    <!-- DispacherServlet 不拦截未配置的请求 -->
-    <mvc:default-servlet-handler/>
 
     <!-- 视图解析器 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
