@@ -14,7 +14,7 @@
     <!-- 指定 SpringMVC 使用的 conversionService -->
     <mvc:annotation-driven conversion-service="myConversionService"/>
 
-    <!-- DispacherServlet 不拦截未配置的请求 -->
+    <!-- DispatcherServlet 能处理未配置的请求 -->
     <mvc:default-servlet-handler/>
 
     <!-- 配置 conversionService -->
