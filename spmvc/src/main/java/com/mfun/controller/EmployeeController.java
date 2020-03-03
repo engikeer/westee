@@ -75,4 +75,10 @@ public class EmployeeController {
         return "redirect:/employees";
     }
 
+    @PostMapping("/quickadd")
+    public String quickAdd(@RequestParam("empinfo") Employee employee) {
+        employeeDao.save(employee);
+        return "redirect:/employees";
+    }
+
 }

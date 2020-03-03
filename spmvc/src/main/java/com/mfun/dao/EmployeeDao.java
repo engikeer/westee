@@ -5,13 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Repository
 public class EmployeeDao {
     private DepartmentDao departmentDao;
-    private final Map<Integer, Employee> employeeMap = new HashMap<>();
+    private final Map<Integer, Employee> employeeMap = new LinkedHashMap<>();
     private int initId = 1006;
 
     @Autowired

@@ -4,12 +4,12 @@ import com.mfun.bean.Department;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Repository
 public class DepartmentDao {
-    private final Map<Integer, Department> departmentMap = new HashMap<>();
+    private final Map<Integer, Department> departmentMap = new LinkedHashMap<>();
 
     public DepartmentDao() {
         departmentMap.put(101, new Department(101,"人事院"));

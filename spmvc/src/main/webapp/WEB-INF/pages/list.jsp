@@ -30,6 +30,10 @@
     </c:forEach>
 </table>
 <a href="${pageContext.request.contextPath}/add">添加员工</a>
+<form action="${pageContext.request.contextPath}/quickadd" method="post">
+    <input type="hidden" name="empinfo" value="吴用-智多星@梁山.com-1-101">
+    <input type="submit" value="快速添加员工">
+</form>
 
 <form id="deleteForm" action="" method="post">
     <input type="hidden" name="_method" value="delete">
