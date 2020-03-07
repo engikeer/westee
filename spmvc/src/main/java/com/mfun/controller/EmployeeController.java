@@ -5,14 +5,20 @@ import com.mfun.bean.Employee;
 import com.mfun.dao.DepartmentDao;
 import com.mfun.dao.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +69,8 @@ public class EmployeeController {
         }
     }
 
-    @GetMapping("/employee/{id}")
+    @ResponseBody
+    @GetMapping(value = "/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public String toEdit(@PathVariable int id, ModelMap map) {
         Employee employee = employeeDao.getOne(id);
         map.addAttribute("employee", employee);
@@ -99,5 +106,36 @@ public class EmployeeController {
         employeeDao.save(employee);
         return "redirect:/employees";
     }
+
+    @GetMapping("/entity")
+    public ResponseEntity<Employee> getEntity() {
+        Employee body = new Employee(0, "测试", "测试@tt.com", 10, departmentDao.getOne(101));
+        MultiValueMap<String, String> headers = new HttpHeaders();
+        headers.add("ContentType", "application/json");
+        HttpStatus status = HttpStatus.OK;
+        return new ResponseEntity<>(body, headers, status);
+    }
+
+    @GetMapping("/download")
+    public ResponseEntity<byte[]> download(HttpServletRequest request) {
+        ServletContext servletContext = request.getServletContext();
+        // 1. 获取要下载的文件
+        String realPath = servletContext.getRealPath("WEB-INF/path/to/file");
+        String fileName = realPath.substring(realPath.lastIndexOf("/") + 1);
+        try(FileInputStream in = new FileInputStream(realPath)) {
+            byte[] temp = new byte[in.available()];
+            in.read(temp);
+            // 2. 设置响应头
+            MultiValueMap<String, String> headers = new HttpHeaders();
+            headers.add("Content-Disposition",
+                    "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+            // 3. 将文件内容作为响应体
+            return new ResponseEntity<>(temp, headers, HttpStatus.OK);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 }
