@@ -17,6 +17,18 @@
     <!-- DispatcherServlet 将未配置的请求交给 tomcat DefaultServlet 处理 -->
     <mvc:default-servlet-handler/>
 
+    <!-- 配置所有拦截器 -->
+    <mvc:interceptors>
+        <!-- 通过 bean 配置拦截器，默认拦截所有请求 -->
+        <bean class="com.mfun.interceptor.HelloInterceptor"/>
+        <!-- 通过 mvc:interceptor 标签配置拦截器，可以指定更详细的设置 -->
+        <mvc:interceptor>
+            <!-- 指定拦截的请求路径 -->
+            <mvc:mapping path="/app/user"/>
+            <bean class="com.mfun.interceptor.HelloInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!-- 配置 conversionService -->
     <bean id="myConversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters">
@@ -31,5 +43,15 @@
         <!-- 指定页面路径的前缀和后缀 -->
         <property name="prefix" value="/WEB-INF/pages/"/>
         <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 文件上传解析器，id 必须是 multipartResolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 一次上传中，文件总大小限制，单位是字节 -->
+        <property name="maxUploadSize" value="#{200 * 1024*1024}"/>
+        <!-- 单个文件的大小限制 -->
+        <property name="maxUploadSizePerFile" value="#{50 * 1024 * 1024}"/>
+        <!-- 表单普通项的默认编码 -->
+        <property name="defaultEncoding" value="utf-8"/>
     </bean>
 </beans>

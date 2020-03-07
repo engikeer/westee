@@ -12,13 +12,17 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -134,6 +138,24 @@ public class EmployeeController {
         } catch (IOException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @PostMapping("upload")
+    public String upload(String username, @RequestParam MultipartFile file) {
+
+        // 获取文件项的参数名（即，表单项的名称）
+        String name = file.getName();
+        // 获取文件名
+        String fileName = file.getOriginalFilename();
+
+        // 保存文件
+        try {
+            file.transferTo(new File("path/to/target/directory/" + username + "/" + fileName));
+            return "success";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "error";
         }
     }
 
