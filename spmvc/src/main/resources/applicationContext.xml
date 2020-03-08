@@ -54,4 +54,9 @@
         <!-- 表单普通项的默认编码 -->
         <property name="defaultEncoding" value="utf-8"/>
     </bean>
+
+    <!-- 国际化资源管理器 -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="list.employees"/>
+    </bean>
 </beans>

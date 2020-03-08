@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>员工列表</title>
@@ -9,12 +10,12 @@
 <h2>员工列表</h2>
 <table border="1" cellpadding="5" cellspacing="0">
     <tr>
-        <th>ID</th>
-        <th>姓名</th>
-        <th>Email</th>
-        <th>性别</th>
-        <th>部门</th>
-        <th colspan="2">操作</th>
+        <th><fmt:message key="id"/></th>
+        <th><fmt:message key="name"/></th>
+        <th><fmt:message key="email"/></th>
+        <th><fmt:message key="gender"/></th>
+        <th><fmt:message key="department"/></th>
+        <th colspan="2"><fmt:message key="action"/></th>
     </tr>
     <c:forEach items="${requestScope.employees}" var="employee">
         <tr>
