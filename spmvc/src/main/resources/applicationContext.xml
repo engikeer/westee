@@ -61,4 +61,18 @@
     </bean>
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
+
+    <!-- 配置 SimpleMappingExceptionResolver，通过映射来处理异常 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!-- 配置异常到页面的映射，值是 Properties 对象 -->
+        <property name="exceptionMappings">
+            <props>
+                <!-- key 是异常的全类名，value 是页面的视图名 -->
+                <prop key="java.lang.ArithmeticException">error</prop>
+            </props>
+        </property>
+        <!-- 指定保存异常对象使用的属性名，可从请求域中通过该名称取出异常对象 -->
+        <!-- 默认是 SimpleMappingExceptionResolver.DEFAULT_EXCEPTION_ATTRIBUTE，即 exception -->
+        <property name="exceptionAttribute" value="ex"/>
+    </bean>
 </beans>
