@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<a href="hello">hello</a>
+<a href="${pageContext.request.contextPath}/context">hello</a>
 
 </body>
 </html>
