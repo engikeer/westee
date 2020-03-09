@@ -1,7 +1,5 @@
 package com.mfun.bean;
 
-import com.mysql.cj.jdbc.Driver;
-
 import java.io.Serializable;
 
 public class Employee implements Serializable {
