@@ -22,13 +22,20 @@ public class MyBatisTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
 
         // 2. 从 SqlSessionFactory 中获取 SqlSession
-        try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
+        try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
             // 3. 使用 SqlSession 与数据库交互
             // 获取 Dao 接口的实现（MyBatis 根据 mapper 创建实现类）
             EmployeeDao employeeDao = sqlSession.getMapper(EmployeeDao.class);
             // 使用 Dao 对象实现数据库操作
             Employee employee = employeeDao.getEmpById(1);
             System.out.println(employee);
+//            employee.setEmail("xizi@eto.org");
+//            employeeDao.updateEmployee(employee);
+            // 新增
+//            employeeDao.insertEmployee(new Employee(null, "十强", 1, "Mark@cc.cc"));
+            // 删除
+//            employeeDao.deleteEmployee(2);
+//            sqlSession.commit();
         }
     }
 }

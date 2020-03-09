@@ -5,9 +5,26 @@
 <!-- 1. namespace 写 Dao 接口的全类名，通过接口规定 mapper 的行为，mapper 就相当于该接口的实现类 -->
 <mapper namespace="com.mfun.dao.EmployeeDao">
     <!-- select 标签就定义了一个查询操作，可用于实现一个查询方法 -->
-    <!-- 下面实现 getEmpById，id 是实现的方法名，resultType 是返回值类型，查询方法必须指定 resultType -->
+    <!-- 下面实现 getEmpById，id 是实现的方法名，resultType 是返回值类型，查询方法必须指定 resultType，不需要指定参数类型 -->
     <!-- 标签的值就是使用的 sql 语句，#{参数名} 用于接收方法的参数 -->
+    <!-- 注意，SQL 语句末尾不需要分号（与 JDBC 定义语句相同） -->
     <select id="getEmpById" resultType="com.mfun.bean.Employee">
         select * from t_employee where id = #{id}
     </select>
+
+    <!-- 增删改不需要指定返回值类型，MyBatis 可根据方法的返回值类型自动判断返回值 -->
+    <!-- 如果返回值类型为数值：int、long，返回影响的行数 -->
+    <!-- 如果返回值类型为布尔值：boolean，影响 0 行返回 false，否则返回 true -->
+    <!-- 使用 #{属性名} 可直接取出参数对象的属性 -->
+    <update id="updateEmployee">
+        update t_employee set empname=#{empName}, gender=#{gender}, email=#{email} where id=#{id}
+    </update>
+
+    <insert id="insertEmployee">
+        insert into t_employee (empname, gender, email) VALUES (#{empName}, #{gender}, #{email})
+    </insert>
+
+    <delete id="deleteEmployee">
+        delete from t_employee where id=#{id}
+    </delete>
 </mapper>

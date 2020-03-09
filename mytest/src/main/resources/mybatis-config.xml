@@ -3,15 +3,20 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <!-- 引用外部属性文件 -->
+    <!-- resource 属性用于引用类路径下的 properties 文件，url 属性用于引用磁盘路径或网络路径下的资源 -->
+    <!-- 在之后可使用 ${key} 来取出配置文件中的值 -->
+    <properties resource="db.properties"/>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <!-- 数据源 -->
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/smbms"/>
-                <property name="username" value="engikeer"/>
-                <property name="password" value="111"/>
+                <property name="driver" value="${jdbc.drivers}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
             </dataSource>
         </environment>
     </environments>
