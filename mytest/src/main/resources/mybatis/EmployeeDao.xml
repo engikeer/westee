@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 1. namespace 写 Dao 接口的全类名，通过接口规定 mapper 的行为，mapper 就相当于该接口的实现类 -->
+<mapper namespace="com.mfun.dao.EmployeeDao">
+    <!-- select 标签就定义了一个查询操作，可用于实现一个查询方法 -->
+    <!-- 下面实现 getEmpById，id 是实现的方法名，resultType 是返回值类型，查询方法必须指定 resultType -->
+    <!-- 标签的值就是使用的 sql 语句，#{参数名} 用于接收方法的参数 -->
+    <select id="getEmpById" resultType="com.mfun.bean.Employee">
+        select * from t_employee where id = #{id}
+    </select>
+</mapper>

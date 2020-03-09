@@ -22,6 +22,7 @@
         <module>ssm</module>
         <module>springtest</module>
         <module>spmvc</module>
+        <module>mytest</module>
     </modules>
 
     <dependencies>
