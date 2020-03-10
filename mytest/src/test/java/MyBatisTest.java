@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 
 public class MyBatisTest {
 
@@ -20,6 +22,11 @@ public class MyBatisTest {
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        // 全局配置文件中如果有非 ascii 字符，需要指定字符集并使用 reader 来读取配置文件
+//        Resources.setCharset(StandardCharsets.UTF_8);
+//        Reader reader = Resources.getResourceAsReader(resource);
+//        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
 
         // 2. 从 SqlSessionFactory 中获取 SqlSession
         try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {

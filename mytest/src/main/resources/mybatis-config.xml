@@ -7,6 +7,10 @@
     <!-- resource 属性用于引用类路径下的 properties 文件，url 属性用于引用磁盘路径或网络路径下的资源 -->
     <!-- 在之后可使用 ${key} 来取出配置文件中的值 -->
     <properties resource="db.properties"/>
+    
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
 
     <environments default="development">
         <environment id="development">
