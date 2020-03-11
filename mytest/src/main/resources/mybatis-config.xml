@@ -27,6 +27,6 @@
 
     <!-- 注册 mapper，resource 属性表示从类路径下查找指定的 mapper 资源，值是类路径开始的相对路径 -->
     <mappers>
-        <mapper resource="mybatis/EmployeeDao.xml"/>
+        <package name="com.mfun.dao"/>
     </mappers>
 </configuration>
