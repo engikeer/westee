@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mfun.dao.StudentDao">
+<!--    <select id="getStudentById" resultMap="toStudent">-->
+<!--        SELECT s.*,-->
+<!--               t.name tname, t.gender tgender-->
+<!--        FROM t_student s LEFT JOIN t_teacher t ON t.id = s.manager WHERE s.id = #{id}-->
+<!--    </select>-->
+
+<!--    <resultMap id="toStudent" type="com.mfun.bean.Student" autoMapping="true">-->
+<!--        <association property="manager" javaType="com.mfun.bean.Teacher">-->
+<!--            <id property="id" column="manager"/>-->
+<!--            <result property="name" column="tname"/>-->
+<!--            <result property="gender" column="tgender"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+
+    <select id="getStudentById" resultMap="toStudent">
+        SELECT s.*, t.id tid, t.name tname, t.gender tgender
+        FROM s_to_t LEFT JOIN t_student s on s_to_t.student_id = s.id
+                    LEFT JOIN t_teacher t on s_to_t.teacher_id = t.id WHERE s.id = #{id};
+    </select>
+
+    <select id="getTeacherById" resultType="com.mfun.bean.Teacher">
+        SELECT * FROM t_teacher WHERE id = #{id}
+    </select>
+    
+    <select id="getTeachersByStudentId" resultType="com.mfun.bean.Teacher">
+        SELECT tt.* FROM s_to_t st LEFT JOIN t_teacher tt on st.teacher_id = tt.id WHERE st.student_id = #{id}
+    </select>
+
+<!--    <select id="getStudentById" resultMap="toStudent">-->
+<!--        SELECT * FROM t_student WHERE id = #{id}-->
+<!--    </select>-->
+
+
+    <resultMap id="toStudent" type="com.mfun.bean.Student" autoMapping="true">
+        <id property="id" column="id"/>
+        <association property="manager" select="com.mfun.dao.StudentDao.getTeacherById" column="manager" fetchType="lazy"/>
+<!--        <association property="manager" select="com.mfun.dao.StudentDao.getTeacherByIdAndGender" column="{id=manager, gender=tgender}"/>-->
+        <collection property="teachers" ofType="com.mfun.bean.Teacher">
+            <id property="id" column="tid"/>
+            <result property="name" column="tname"/>
+            <result property="gender" column="tgender"/>
+        </collection>
+
+<!--        <collection property="teachers" select="com.mfun.dao.StudentDao.getTeachersByStudentId" column="id"/>-->
+    </resultMap>
+</mapper>

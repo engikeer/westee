@@ -9,7 +9,7 @@
     <!-- 标签的值就是使用的 sql 语句，#{参数名} 用于接收方法的参数 -->
     <!-- 注意，SQL 语句末尾不需要分号（与 JDBC 定义语句相同） -->
     <select id="getEmpById" resultType="com.mfun.bean.Employee">
-        select * from t_employee where id = #{id}
+        select * from t_employee where id=#{id}
     </select>
 
     <!-- 增删改不需要指定返回值类型，MyBatis 可根据方法的返回值类型自动判断返回值 -->
@@ -20,11 +20,20 @@
         update t_employee set empname=#{empName}, gender=#{gender}, email=#{email} where id=#{id}
     </update>
 
-    <insert id="insertEmployee">
+    <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id">
         insert into t_employee (empname, gender, email) VALUES (#{empName}, #{gender}, #{email})
     </insert>
 
     <delete id="deleteEmployee">
         delete from t_employee where id=#{id}
     </delete>
+    
+    <resultMap id="myEmployee" type="com.mfun.bean.Employee">
+        <!-- 主键列的规则通过 <id> 指定  -->
+        <!-- column 指定那一列是主键，property 指定主键保存到哪个属性 -->
+        <id column="id" property="id"/>
+
+        <!-- 普通列的规则通过 <result> 指定 -->
+        <result column="empname" property="empName"/>
+    </resultMap>
 </mapper>

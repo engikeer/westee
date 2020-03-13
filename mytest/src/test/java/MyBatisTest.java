@@ -1,5 +1,6 @@
-import com.mfun.bean.Employee;
+import com.mfun.bean.Student;
 import com.mfun.dao.EmployeeDao;
+import com.mfun.dao.StudentDao;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -34,8 +35,8 @@ public class MyBatisTest {
             // 获取 Dao 接口的实现（MyBatis 根据 mapper 创建实现类）
             EmployeeDao employeeDao = sqlSession.getMapper(EmployeeDao.class);
             // 使用 Dao 对象实现数据库操作
-            Employee employee = employeeDao.getEmpById(1);
-            System.out.println(employee);
+//            Employee employee = employeeDao.getEmpById(1);
+//            System.out.println(employee);
 //            employee.setEmail("xizi@eto.org");
 //            employeeDao.updateEmployee(employee);
             // 新增
@@ -43,6 +44,21 @@ public class MyBatisTest {
             // 删除
 //            employeeDao.deleteEmployee(2);
 //            sqlSession.commit();
+        }
+    }
+
+    @Test
+    public void testMapper() throws Exception {
+        String resource = "mybatis-config.xml";
+        Resources.setCharset(StandardCharsets.UTF_8);
+        Reader reader = Resources.getResourceAsReader(resource);
+        SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
+
+        try (SqlSession session = sessionFactory.openSession(true)) {
+            StudentDao studentDao = session.getMapper(StudentDao.class);
+
+            Student student = studentDao.getStudentById(2);
+            System.out.println(student);
         }
     }
 }
