@@ -48,4 +48,18 @@
 
 <!--        <collection property="teachers" select="com.mfun.dao.StudentDao.getTeachersByStudentId" column="id"/>-->
     </resultMap>
+
+    <sql id="selectStudent">SELECT * FROM t_student</sql>
+    <select id="getStudentByCondition" resultType="com.mfun.bean.Student">
+    <include refid="selectStudent"/>
+    <trim prefix="WHERE" prefixOverrides="AND ">
+        <if test="id != null">
+            AND id &lt; #{id}
+        </if>
+        <if test="gender != null">
+            AND gender = #{gender}
+        </if>
+    </trim>
+<!--    <trim prefix="" prefixOverrides="" suffix="" suffixOverrides=""-->
+</select>
 </mapper>

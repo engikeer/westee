@@ -57,8 +57,8 @@ public class MyBatisTest {
         try (SqlSession session = sessionFactory.openSession(true)) {
             StudentDao studentDao = session.getMapper(StudentDao.class);
 
-            Student student = studentDao.getStudentById(2);
-            System.out.println(student);
+            Student student = new Student(3, null, 1);
+            System.out.println(studentDao.getStudentByCondition(student).size());
         }
     }
 }
