@@ -1,3 +1,6 @@
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.mfun.bean.Employee;
 import com.mfun.bean.Student;
 import com.mfun.dao.EmployeeDao;
 import com.mfun.dao.StudentDao;
@@ -62,10 +65,16 @@ public class MyBatisTest {
         SqlSessionFactory sessionFactory = new SqlSessionFactoryBuilder().build(reader);
 
         try (SqlSession session = sessionFactory.openSession(true)) {
-            StudentDao studentDao = session.getMapper(StudentDao.class);
+            EmployeeDao employeeDao = session.getMapper(EmployeeDao.class);
 
-            Student student = new Student(3, null, 1);
-            System.out.println(studentDao.getStudentByCondition(student).size());
+            PageHelper.startPage(4, 30);
+            List<Employee> employees =  employeeDao.getAllEmployee();
+            PageInfo<Employee> pageInfo = new PageInfo<>(employees, 6);
+            for (Employee employee :pageInfo.getList()) {
+                System.out.println(employee);
+            }
+//            System.out.println(employees.size());
+
         }
     }
 
@@ -81,4 +90,24 @@ public class MyBatisTest {
         MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
         myBatisGenerator.generate(null);
     }
+
+    @Test
+    public void inserts() throws Exception {
+        String resource = "mybatis-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
+            EmployeeDao employeeDao = sqlSession.getMapper(EmployeeDao.class);
+            List<Employee> employees = new ArrayList<>();
+            for (int i = 1; i <= 1000; i++) {
+                String name = "emp-" + i;
+                int gender = Math.random() < 0.5 ? 0 : 1;
+                String email = name + "@cc.com";
+                employees.add(new Employee(null, name, gender, email));
+            }
+            employeeDao.insertEmployees(employees);
+        }
+    }
+
 }

@@ -12,6 +12,10 @@
         select * from t_employee where id=#{id}
     </select>
 
+    <select id="getAllEmployee" resultType="com.mfun.bean.Employee">
+        select * from t_employee
+    </select>
+
     <!-- 增删改不需要指定返回值类型，MyBatis 可根据方法的返回值类型自动判断返回值 -->
     <!-- 如果返回值类型为数值：int、long，返回影响的行数 -->
     <!-- 如果返回值类型为布尔值：boolean，影响 0 行返回 false，否则返回 true -->
@@ -19,6 +23,13 @@
     <update id="updateEmployee">
         update t_employee set empname=#{empName}, gender=#{gender}, email=#{email} where id=#{id}
     </update>
+
+    <insert id="insertEmployees">
+        insert into t_employee (empname, gender, email) VALUES
+        <foreach collection="list" item="emp" separator=",">
+            (#{emp.empName}, #{emp.gender}, #{emp.email})
+        </foreach>
+    </insert>
 
     <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id">
         insert into t_employee (empname, gender, email) VALUES (#{empName}, #{gender}, #{email})
