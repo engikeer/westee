@@ -108,4 +108,25 @@
     <bean id="car" class="com.mfun.bean.Car">
         <property name="name" value="奥迪" />
     </bean>
+
+<!--    &lt;!&ndash; 配置获取 sqlSessionFactoryBean &ndash;&gt;-->
+<!--    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+<!--        &lt;!&ndash; 指定配置文件位置 &ndash;&gt;-->
+<!--        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>-->
+<!--        &lt;!&ndash; 指定使用的数据源 &ndash;&gt;-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+<!--        &lt;!&ndash; 指定 xml 映射文件的位置 &ndash;&gt;-->
+<!--        <property name="mapperLocations" value="classpath:mybatis/mapper/*.xml"/>-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash; 自动扫描包并创建 mapper  &ndash;&gt;-->
+<!--    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+<!--        &lt;!&ndash; 指定 mapper 接口定义所在的包 &ndash;&gt;-->
+<!--        <property name="basePackage" value="com.mfun.dao"/>-->
+
+<!--        &lt;!&ndash; 默认可以自动注入 SqlSessionFactoryBean &ndash;&gt;-->
+<!--        &lt;!&ndash; 但如果配置了多个 SqlSessionFactoryBean（例如，为了使用不同的数据源），就需要指定 &ndash;&gt;-->
+<!--        &lt;!&ndash; 指定所使用的 SqlSessionFactoryBean 的 bean 名 &ndash;&gt;-->
+<!--        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+<!--    </bean>-->
 </beans>

@@ -6,11 +6,18 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.jupiter.api.Test;
+import org.mybatis.generator.api.MyBatisGenerator;
+import org.mybatis.generator.config.Configuration;
+import org.mybatis.generator.config.xml.ConfigurationParser;
+import org.mybatis.generator.internal.DefaultShellCallback;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MyBatisTest {
 
@@ -60,5 +67,18 @@ public class MyBatisTest {
             Student student = new Student(3, null, 1);
             System.out.println(studentDao.getStudentByCondition(student).size());
         }
+    }
+
+    @Test
+    public void mbgTest() throws Exception {
+        List<String> warnings = new ArrayList<>();
+        boolean overwrite = true;
+        File configFile = new File("src/main/resources/generatorConfig.xml");
+        System.out.println(configFile.canRead());
+        ConfigurationParser cp = new ConfigurationParser(warnings);
+        Configuration config = cp.parseConfiguration(configFile);
+        DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+        MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
+        myBatisGenerator.generate(null);
     }
 }

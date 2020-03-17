@@ -1,0 +1,33 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <!-- 引入外部配置文件 -->
+    <properties resource="db.properties"/>
+    <!-- targetRuntime 指定运行时，如果设置为 MyBatis3 就默认会生成条件查询方法和 *Example 类 -->
+    <context id="simple" targetRuntime="MyBatis3Simple">
+
+        <!-- 指定数据库连接 -->
+        <!-- driverClass：驱动，connectionURL 连接的 URL，userId、password：用户名和密码 -->
+        <jdbcConnection driverClass="${jdbc.drivers}"
+                        connectionURL="${jdbc.url}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}"/>
+
+        <!-- JavaBean 生成器相关配置 -->
+        <!-- targetPackage：存放JavaBean 的包，targetProject：存放 JavaBean 的工程目录（类路径根目录） -->
+        <!-- targetProject 的相对路径从 Java 运行目录开始，Maven 项目从项目根目录开始，单元测试则从模块根目录开始 -->
+        <!-- 注意，如果 targetProject 指定的目录不存在，不会生成文件。而 targetPackage 指定的包不存在会自动创建 -->
+        <javaModelGenerator targetPackage="com.mfun.bean" targetProject="src/main/java"/>
+
+        <!-- xml 映射文件生成器相关配置，参数含义同上 -->
+        <sqlMapGenerator targetPackage="com.mfun.dao" targetProject="src/main/resources"/>
+
+        <!-- Java 接口生成器的相关配置（生成 Dao 接口），参数含义同上 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mfun.dao" targetProject="src/main/java"/>
+
+        <!-- 指定用于生成的数据表，domainObjectName：表对应的对象的名称 -->
+        <table tableName="Orders" domainObjectName="Order" />
+    </context>
+</generatorConfiguration>
