@@ -14,6 +14,7 @@ public class HikariCPTest {
     public static void main(String[] args) throws Exception {
 //        HikariConfig config = new HikariConfig("se/conf/db.properties");
         Properties properties = new Properties();
+        // InputStream in = this.getClass().getResourceAsStream("/db.properties")
         try (InputStream in = new FileInputStream("se/conf/db.properties")) {
             properties.load(in);
         }
